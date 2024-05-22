@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "car-drive-app"
+version = "0.1.0"
+description = "Simple Python game for driving a car around a track."
+authors = ["RJW20"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+pygame = "^2.5.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
