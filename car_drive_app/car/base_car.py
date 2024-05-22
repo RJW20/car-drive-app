@@ -32,5 +32,23 @@ class BaseCar:
 
         self.position += self.velocity
 
+    @property
     def outline(self) -> list[Vector]:
         """Return 2D points that make up the outline of the Car."""
+
+        length_ways = Vector.unit_from_angle(self.angle)
+        width_ways = Vector.unit_from_angle(self.angle + 90)
+
+        front_center = self.position + 20 * length_ways
+        front = [front_center + 2 * i * width_ways for i in range(-5,6)]
+
+        back_center = self.position - 20 * length_ways
+        back = [back_center + 2 * i * width_ways for i in range(-5,6)]
+
+        right_center = self.position + 10 * width_ways
+        right = [right_center + 2 * i * length_ways for i in range(-10,11)]
+
+        left_center = self.position - 10 * width_ways
+        left = [left_center + 2 * i * length_ways for i in range(-10,11)]
+
+        return front + back + right + left
