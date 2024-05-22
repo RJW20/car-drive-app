@@ -6,7 +6,7 @@ class BaseCar:
     """The underlying class for the Car that drives around the Track."""
 
     def __init__(self) -> None:
-        self.position = Vector(0,0)
+        self.position = Vector(30,30)
         self.direction = Vector(1,0)
         self.speed = 0
 
