@@ -5,12 +5,12 @@ import math
 
 @lru_cache
 def cached_sine(theta: float) -> float:
-    return math.sin(theta)
+    return math.sin(math.radians(theta))
 
 
 @lru_cache
 def cached_cosine(theta: float) -> float:
-    return math.cos(theta)
+    return math.cos(math.radians(theta))
 
 
 class Vector:
@@ -32,12 +32,7 @@ class Vector:
     def __rmul__(self, other: float) -> Vector:
         return Vector(self.x * other, self.y * other)
     
-    def rotate_by(self, angle: float) -> None:
-        """Rotate the Vector in place clockwise by the given angle."""
-
-        # Put the angle in the range 0-360 to maximise efficiency in cached trig functions
-        angle = angle % 360
-
-        x = cached_cosine(angle) * self.x - cached_sine(angle) * self.y
-        y = cached_sine(angle) * self.x + cached_cosine(angle) * self.y
-        self.x, self.y = x, y
+    @classmethod
+    def unit_from_angle(cls, angle: float) -> Vector:
+        """Return the unit Vector pointing along the given angle."""
+        return cls(cached_cosine(angle), cached_sine(angle))

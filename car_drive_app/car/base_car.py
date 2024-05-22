@@ -7,12 +7,12 @@ class BaseCar:
 
     def __init__(self) -> None:
         self.position = Vector(30,30)
-        self.direction = Vector(1,0)
+        self.angle = 0
         self.speed = 0
 
     @property
     def velocity(self) -> Vector:
-        return self.direction * self.speed
+        return Vector.unit_from_angle(self.angle) * self.speed
 
     def move(self, turn: Turn, accelerate: bool) -> None:
         """Advance the Car one frame.
@@ -22,8 +22,7 @@ class BaseCar:
         Adds the new velocity to the Car's position.
         """
 
-        if not turn == Turn.STRAIGHT:
-            self.direction.rotate_by(turn.value)
+        self.angle += turn.value
 
         if accelerate:
             self.speed = min(self.speed + 1, 10)
