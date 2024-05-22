@@ -16,6 +16,7 @@ class Game:
 
         # Start the Car
         self.car = BaseCar()
+        self.car.reset()
 
     def check_move(self) -> tuple[Turn, bool]:
         """Check for new user input and convert to valid move."""
