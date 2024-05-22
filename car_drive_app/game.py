@@ -20,27 +20,26 @@ class Game:
     def check_move(self) -> tuple[Turn, bool]:
         """Check for new user input and convert to valid move."""
  
-        # Check for a Turn
-        move = Turn.STRAIGHT
+        # Allow quitting
         for event in pygame.event.get():
-
-            # Allow quitting
             if event.type == pygame.QUIT: 
                 pygame.quit()
                 exit()
 
-            # Check key presses
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_RIGHT:
-                    move = Turn.RIGHT
-                elif event.key == pygame.K_LEFT:
-                    move = Turn.LEFT
-
-        # Check for acceleration
+        # Check for key input
         keys = pygame.key.get_pressed()
+
+        if keys[pygame.K_RIGHT] != keys[pygame.K_LEFT]:
+            if keys[pygame.K_RIGHT]:
+                turn = Turn.RIGHT
+            else:
+                turn = Turn.LEFT
+        else:
+            turn = Turn.STRAIGHT
+
         accelerate =  keys[pygame.K_SPACE]
 
-        return move, accelerate
+        return turn, accelerate
 
     def advance(self, turn: Turn, accelerate: bool) -> None:
         """Advance to the next frame."""
