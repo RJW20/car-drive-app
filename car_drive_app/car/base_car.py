@@ -22,7 +22,8 @@ class BaseCar:
         Adds the new velocity to the Car's position.
         """
 
-        self.angle += turn.value
+        if self.speed != 0:
+            self.angle += turn.value
 
         if accelerate:
             self.speed = min(self.speed + 1, 10)
