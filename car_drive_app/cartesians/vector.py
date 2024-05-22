@@ -31,7 +31,8 @@ class Vector:
     
     def __rmul__(self, other: float) -> Vector:
         return Vector(self.x * other, self.y * other)
-    
+
+    @property
     def magnitude(self) -> float:
         """Return the Euclidean length of the Vector."""
         return math.sqrt(self.x ** 2 + self.y ** 2)
