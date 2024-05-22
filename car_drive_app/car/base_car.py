@@ -26,11 +26,11 @@ class BaseCar:
             self.angle += turn.value
 
         if accelerate:
-            self.speed = min(self.speed + 1, 10)
+            self.speed = min(self.speed + 0.6, 12)
         else:
-            self.speed = max(self.speed - 1, 0)
+            self.speed = max(self.speed - 0.4, 0)
 
         self.position += self.velocity
 
-    def outline(self) -> list[tuple[int,int]]:
-        """Return 2d points that make up the outline of the Car."""
+    def outline(self) -> list[Vector]:
+        """Return 2D points that make up the outline of the Car."""
