@@ -19,8 +19,9 @@ class Game:
 
     def check_move(self) -> tuple[Turn, bool]:
         """Check for new user input and convert to valid move."""
-
+ 
         # Check for a Turn
+        move = Turn.STRAIGHT
         for event in pygame.event.get():
 
             # Allow quitting
@@ -39,7 +40,7 @@ class Game:
         keys = pygame.key.get_pressed()
         accelerate =  keys[pygame.K_SPACE]
 
-        return move, accelerate if move else Turn.STRAIGHT, accelerate
+        return move, accelerate
 
     def advance(self, turn: Turn, accelerate: bool) -> None:
         """Advance to the next frame."""
@@ -53,7 +54,7 @@ class Game:
         self.screen.fill('white')
 
         # Draw the Car
-        pygame.draw.circle(self.screen, 'red', self.car.position, 5)
+        pygame.draw.circle(self.screen, 'red', (self.car.position.x, self.car.position.y), 5)
 
         # Show the changes
         pygame.display.flip()
@@ -62,7 +63,7 @@ class Game:
         """Run the main game loop."""
 
         while True:
-            self.advance(*self.check_move)
+            self.advance(*self.check_move())
             self.update_screen()
 
             self.clock.tick(60)
