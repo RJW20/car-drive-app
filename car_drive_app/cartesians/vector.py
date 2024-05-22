@@ -31,13 +31,8 @@ class Vector:
     
     def __rmul__(self, other: float) -> Vector:
         return Vector(self.x * other, self.y * other)
-
-    @property
-    def magnitude(self) -> float:
-        """Return the Euclidean length of the Vector."""
-        return math.sqrt(self.x ** 2 + self.y ** 2)
     
-    def rotate(self, angle: float) -> None:
+    def rotate_by(self, angle: float) -> None:
         """Rotate the Vector in place clockwise by the given angle."""
 
         # Put the angle in the range 0-360 to maximise efficiency in cached trig functions
