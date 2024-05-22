@@ -1,11 +1,12 @@
+from car_drive_app.cartesians import Vector
 
 
-
-class Car:
-    """The Car that drives around the Track."""
+class BaseCar:
+    """The underlying class for the Car that drives around the Track."""
 
     def __init__(self) -> None:
-        pass
+        self.position = Vector(0,0)
+        self.angle = 0
 
     def outline(self) -> list[tuple[int,int]]:
         """Return 2d points that make up the outline of the Car."""
