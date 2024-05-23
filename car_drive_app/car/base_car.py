@@ -5,50 +5,50 @@ from car_drive_app.car.turn import Turn
 class BaseCar:
     """The underlying class for the Car that drives around the Track."""
 
-    LENGTH = 40
-    WIDTH = 20
+    LENGTH = 80
+    WIDTH = 40
+    MASS = 1
+    POWER = 10
+    DRAG_COEFFICIENT = 0.002
+    ROLLING_COEFFICIENT = 0.06
 
     def __init__(self) -> None:
         self.position: Vector
-        self.speed: float
+        self.velocity: Vector
         self.angle: float
         self.angular_velocity: float
 
     def reset(self) -> None:
         """Return the Car to the start point."""
 
-        self.position = Vector(30,30)
-        self.speed = 0
+        self.position = Vector(100,400)
+        self.velocity = Vector(0,0)
         self.angle = 0
         self.angular_velocity = 0
 
     @property
-    def velocity(self) -> Vector:
-        return Vector.unit_from_angle(self.angle) * self.speed
+    def direction(self) -> Vector:
+        """Return the unit vector in direction self.angle."""
+        return Vector.unit_from_angle(self.angle)
 
     def move(self, turn: Turn, accelerate: bool) -> None:
-        """Advance the Car one frame.
-        
-        Rotates the Car's direction by the angle in turn and increases or 
-        decreases the Car's speed according to accelerate.
-        Adds the new velocity to the Car's position.
-        """
+        """Advance the Car one frame."""
 
-        if self.speed != 0:
-            self.angle += turn.value
+        # Longitudinal forces
+        traction = self.POWER * self.direction if accelerate else Vector(0,0)
+        drag = - self.DRAG_COEFFICIENT * self.velocity.magnitude * self.velocity
+        rolling = - self.ROLLING_COEFFICIENT * self.velocity
 
-        if accelerate:
-            self.speed = min(self.speed + 0.6, 12)
-        else:
-            self.speed = max(self.speed - 0.4, 0)
-
+        # Adjust the position
+        acceleration = (traction + drag + rolling) / self.MASS
+        self.velocity += acceleration
         self.position += self.velocity
 
     @property
     def outline(self) -> list[Vector]:
         """Return 2D points that make up the outline of the Car."""
 
-        length_ways = Vector.unit_from_angle(self.angle) * (self.LENGTH // 20)
+        length_ways = self.direction * (self.LENGTH // 20)
         width_ways = Vector.unit_from_angle(self.angle + 90) * (self.WIDTH // 10)
 
         front_center = self.position + 10 *  length_ways

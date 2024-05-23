@@ -32,6 +32,20 @@ class Vector:
     def __rmul__(self, other: float) -> Vector:
         return Vector(self.x * other, self.y * other)
     
+    def __truediv__(self, other: float) -> Vector:
+        return Vector(self.x / other, self.y / other)
+    
+    def __rtruediv__(self, other: float) -> Vector:
+        return Vector(self.x / other, self.y / other)
+    
+    def __str__(self) -> str:
+        return f'({self.x}, {self.y})'
+    
+    @property
+    def magnitude(self) -> float:
+        """Return the Euclidean length of the Vector."""
+        return math.sqrt(self.x ** 2 + self.y ** 2)
+    
     @classmethod
     def unit_from_angle(cls, angle: float) -> Vector:
         """Return the unit Vector pointing along the given angle."""
