@@ -56,6 +56,7 @@ class BaseCar:
         # Adjust the position and orientation
         self.position += self.velocity + self.WHEELS_OFFSET * (Vector.unit_from_angle(self.orientation + self.turning_angular_velocity) - self.direction)
         self.orientation += self.turning_angular_velocity
+        self.turning_angle /= 1.1
 
     @property
     def outline(self) -> list[Vector]:

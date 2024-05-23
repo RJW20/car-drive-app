@@ -5,5 +5,5 @@ class Turn(Enum):
     """Class containing Car turns and the angle to turn by."""
 
     STRAIGHT = 0
-    RIGHT = math.pi/180
-    LEFT = -math.pi/180
+    RIGHT = math.pi/60
+    LEFT = -math.pi/60
