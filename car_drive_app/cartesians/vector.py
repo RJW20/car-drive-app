@@ -60,3 +60,8 @@ class Vector:
         x = cached_cosine(angle) * self.x - cached_sine(angle) * self.y
         y = cached_sine(angle) * self.x + cached_cosine(angle) * self.y
         self.x, self.y = x, y
+
+
+def dot(vec1: Vector, vec2: Vector) -> float:
+    """Compute the standard dot product between the two given Vectors."""
+    return vec1.x * vec2.x + vec1.y * vec2.y
