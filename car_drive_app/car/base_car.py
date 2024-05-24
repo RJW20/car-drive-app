@@ -12,8 +12,8 @@ class BaseCar(RigidBody):
     LENGTH = 80
     WIDTH = 40
     MASS = 200
-    POWER = 0.5
-    DRAG_COEFFICIENT = 0.002
+    POWER = 200
+    DRAG_COEFFICIENT = 0.8
 
     def __init__(self) -> None:
         # Set up the Wheels
@@ -26,12 +26,15 @@ class BaseCar(RigidBody):
 
         super().__init__(Vector(80,40), self.MASS + 4 * self.wheels[0].MASS)
 
-    def reset(self) -> None:
+    def reset(self, position: Vector = Vector(0,0), angle: float = 0) -> None:
         """Return the Car to the start point."""
 
-        super().reset()
+        super().reset(position, angle)
         for wheel in self.wheels:
             wheel.reset()
+
+        for wheel in self.front_wheels:
+            wheel.turn_angle = 0
 
     @property
     def direction(self) -> Vector:
@@ -51,11 +54,24 @@ class BaseCar(RigidBody):
     def move(self, turn: Turn, accelerate: bool) -> None:
         """Advance the Car one frame."""
 
-        torque_applied = 1 if accelerate else 0
+        torque_applied = - self.POWER / 2  if accelerate else 0
         for wheel in self.front_wheels:
-            self.add_force(wheel.force_exerted(-self.velocity, 0))
+            world_wheel_offset = self.relative_to_world(wheel.offset)
+            world_wheel_velocity = self.point_velocity(world_wheel_offset)
+            relative_wheel_velocity = self.world_to_relative(world_wheel_velocity)
+            relative_wheel_force = wheel.force_exerted(-1 * relative_wheel_velocity, 0)
+            world_wheel_force = self.relative_to_world(relative_wheel_force)
+            self.add_force(world_wheel_force, world_wheel_offset)
         for wheel in self.back_wheels:
-            self.add_force(wheel.force_exerted(-self.velocity, torque_applied))
+            world_wheel_offset = self.relative_to_world(wheel.offset)
+            world_wheel_velocity = self.point_velocity(world_wheel_offset)
+            relative_wheel_velocity = self.world_to_relative(world_wheel_velocity)
+            relative_wheel_force = wheel.force_exerted(-1 * relative_wheel_velocity, torque_applied)
+            world_wheel_force = self.relative_to_world(relative_wheel_force)
+            self.add_force(world_wheel_force, world_wheel_offset)
+
+        drag = - self.DRAG_COEFFICIENT * self.velocity.magnitude * self.velocity
+        self.add_force(drag, Vector(0,0))
 
         super().update()
 
