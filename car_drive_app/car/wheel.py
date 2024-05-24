@@ -15,7 +15,7 @@ class Wheel:
         self.rotation_speed: float
 
     def reset(self) -> None:
-        """Return the Wheel to the stationary."""
+        """Return the Wheel to stationary."""
         
         self.rotation_speed = 0
         self.turn_angle = 0
