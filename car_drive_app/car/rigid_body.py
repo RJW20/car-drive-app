@@ -5,7 +5,7 @@ class RigidBody:
     """Represents a rectangle for which the distance between points making up
     the rectangle does not change."""
 
-    def __init__(self, dimensions: Vector, mass: float, position: Vector = Vector(0,0), angle: float = 0) -> None:
+    def __init__(self, dimensions: Vector, mass: float) -> None:
 
         # Physical properties
         self.dimensions: Vector = dimensions
