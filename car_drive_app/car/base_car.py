@@ -33,9 +33,6 @@ class BaseCar(RigidBody):
         for wheel in self.wheels:
             wheel.reset()
 
-        for wheel in self.front_wheels:
-            wheel.turn_angle = 0
-
     @property
     def direction(self) -> Vector:
         """Return the unit vector in direction self.angle."""
@@ -56,6 +53,7 @@ class BaseCar(RigidBody):
 
         torque_applied = - self.POWER / 2  if accelerate else 0
         for wheel in self.front_wheels:
+            wheel.turn_angle = max(min(wheel.turn_angle + turn.value, math.pi/3), -math.pi/3)
             world_wheel_offset = self.relative_to_world(wheel.offset)
             world_wheel_velocity = self.point_velocity(world_wheel_offset)
             relative_wheel_velocity = self.world_to_relative(world_wheel_velocity)
