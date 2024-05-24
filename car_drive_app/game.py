@@ -1,6 +1,7 @@
 import pygame
 
 from car_drive_app.car.base_car import BaseCar
+from car_drive_app.cartesians import Vector
 from car_drive_app.car import Turn
 
 
@@ -16,7 +17,7 @@ class Game:
 
         # Start the Car
         self.car = BaseCar()
-        self.car.reset()
+        self.car.reset(position=Vector(50,50))
 
     def check_move(self) -> tuple[Turn, bool]:
         """Check for new user input and convert to valid move."""
