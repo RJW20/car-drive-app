@@ -59,7 +59,7 @@ class Vector:
 
         x = cached_cosine(angle) * self.x - cached_sine(angle) * self.y
         y = cached_sine(angle) * self.x + cached_cosine(angle) * self.y
-        return Vector(self.x, self.y)
+        return Vector(x, y)
 
 
 def dot(vec1: Vector, vec2: Vector) -> float:
