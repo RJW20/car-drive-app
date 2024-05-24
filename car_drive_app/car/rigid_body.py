@@ -37,6 +37,14 @@ class RigidBody:
         """Return the velocity of the point at Vector offset from self.position."""
         return self.velocity + self.angular_velocity * Vector(-offset.y, offset.x)
     
+    def relative_to_world(self, vector: Vector) -> Vector:
+        """Convert the given Vector in the frame of the RigidBody to a Vector in the world frame."""
+        return vector.rotate_by(self.angle)
+    
+    def world_to_relative(self, vector: Vector) -> Vector:
+        """Convert the given Vector in the world frame to a Vector in the frame of the RigidBody."""
+        return vector.rotate_by(self.angle)
+    
     def add_force(self, force: Vector, offset: Vector) -> None:
         """Update self.forces and self.torque for a force acting at Vector offset
         from self.position."""
