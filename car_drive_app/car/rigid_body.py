@@ -45,12 +45,12 @@ class RigidBody:
         """Convert the given Vector in the world frame to a Vector in the frame of the RigidBody."""
         return vector.rotate_by(self.angle)
     
-    def add_force(self, force: Vector, offset: Vector) -> None:
+    def add_force(self, world_force: Vector, world_offset: Vector) -> None:
         """Update self.forces and self.torque for a force acting at Vector offset
         from self.position."""
 
-        self.forces += force
-        self.torque += cross(offset, force)
+        self.forces += world_force
+        self.torque += cross(world_offset, world_force)
         
     def update(self) -> None:
         """Update position and angle using self.forces and self.torque."""
