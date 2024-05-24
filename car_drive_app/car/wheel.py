@@ -54,11 +54,12 @@ class Wheel:
 
         return - self.FORWARD_FRICTION * dot(slip_velocity, self.forward_axis)
 
-    def force_exerted(self, ground_velocity: Vector) -> Vector:
-        """Return the force the Wheel is exerting on the Chassis given the ground velocity."""
+    def force_exerted(self, ground_velocity: Vector, torque_applied: float) -> Vector:
+        """Return the force the Wheel is exerting on the Chassis given the ground velocity and the 
+        torque applied (braking or accelerating)."""
 
         resultant_force = Vector(0,0)
-        torque = 0
+        torque = torque_applied
 
         # Calculate which way the tyre is slipping
         tyre_surface_velocity = self.RADIUS * self.rotation_speed * self.forward_axis

@@ -14,7 +14,7 @@ def consant_forward() -> None:
 
     for i in range(20):
 
-        wheel.force_exerted(Vector(-wheel_speed,0))
+        wheel.force_exerted(Vector(-wheel_speed,0), 0)
         tyre_surface_speed = wheel.rotation_speed * wheel.RADIUS
         wheel_speed = - tyre_surface_speed
         print(wheel_speed, wheel.rotation_speed)
@@ -34,7 +34,7 @@ def match_floor() -> None:
 
     for i in range(20):
 
-        wheel.force_exerted(floor_velocity)
+        wheel.force_exerted(floor_velocity, 0)
         tyre_surface_speed = wheel.rotation_speed * wheel.RADIUS
         print(tyre_surface_speed)
 
