@@ -10,20 +10,28 @@ class RigidBody:
         # Physical properties
         self.dimensions: Vector = dimensions
         self.mass: float = mass
-        self.interia: float
+        self.interia: float = mass * (dimensions.x ** 2 + dimensions.y ** 2) / 12
         
         # Linear properties
+        self.position: Vector
+        self.velocity: Vector
+        self.forces: Vector
+
+        # Angular properties
+        self.angle: float
+        self.angular_velocity: float
+        self.torque: float
+
+    def reset(self, position: Vector = Vector(0,0), angle: float = 0) -> None:
+        """Return the RigidBody to stationary."""
+            
         self.position: Vector = position
         self.velocity: Vector = Vector(0,0)
         self.forces: Vector = Vector(0,0)
 
-        # Angular properties
         self.angle: float = angle
         self.angular_velocity: float = 0
         self.torque: float = 0
-
-    def reset(self) -> None:
-        raise Exception('Not yet implemented')
     
     def point_velocity(self, offset: Vector) -> Vector:
         """Return the velocity of the point at Vector offset from self.position."""
