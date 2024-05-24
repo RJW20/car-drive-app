@@ -11,7 +11,8 @@ class Wheel:
     SIDE_FRICTION = 2
     FORWARD_FRICTION = 1
 
-    def __init__(self) -> None:
+    def __init__(self, offset: Vector) -> None:
+        self.offset: Vector = offset
         self.rotation_speed: float
 
     def reset(self) -> None:
