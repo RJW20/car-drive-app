@@ -65,3 +65,7 @@ class Vector:
 def dot(vec1: Vector, vec2: Vector) -> float:
     """Compute the standard dot product between the two given Vectors."""
     return vec1.x * vec2.x + vec1.y * vec2.y
+
+def cross(vec1: Vector, vec2: Vector) -> float:
+    """Compute the 2D cross product between the two given Vectors."""
+    return vec1.x * vec2.y - vec1.y * vec2.x
