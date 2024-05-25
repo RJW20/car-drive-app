@@ -1,6 +1,8 @@
+import math
+
 import pygame
 
-from car_drive_app.car.base_car import BaseCar
+from car_drive_app.car.car import Car
 from car_drive_app.cartesians import Vector
 from car_drive_app.car import Turn
 
@@ -16,8 +18,8 @@ class Game:
         self.clock = pygame.time.Clock()
 
         # Start the Car
-        self.car = BaseCar()
-        self.car.reset(position=Vector(50,50))
+        self.car = Car()
+        self.car.reset(position=Vector(200,200), angle=0)
 
     def check_move(self) -> tuple[Turn, bool]:
         """Check for new user input and convert to valid move."""
@@ -27,6 +29,10 @@ class Game:
             if event.type == pygame.QUIT: 
                 pygame.quit()
                 exit()
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_b:
+                    self.car.reset(position=Vector(200,200))
 
         # Check for key input
         keys = pygame.key.get_pressed()
@@ -56,9 +62,21 @@ class Game:
 
         # Draw the Car
         pygame.draw.circle(self.screen, 'red', (self.car.position.x, self.car.position.y), 5)
-
         for point in self.car.outline:
             pygame.draw.circle(self.screen, 'black', (point.x, point.y), 1)
+
+        # Draw the Car's Wheels
+        for w_cen, w_dir in self.car.wheel_rects:
+            start_pos = w_cen + w_dir * 10
+            end_pos = w_cen - w_dir * 10
+            pygame.draw.line(self.screen, 'black', (start_pos.x, start_pos.y), (end_pos.x, end_pos.y), width=10)
+
+        # Draw the forces acting on the car
+        for force, origin in self.car.force_pairs:
+            start_pos = origin
+            end_pos = origin + force * 20
+            pygame.draw.line(self.screen, 'green', (start_pos.x, start_pos.y), (end_pos.x, end_pos.y), width=2)
+        self.car.force_pairs = []
 
         # Show the changes
         pygame.display.flip()
