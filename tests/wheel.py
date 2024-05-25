@@ -46,7 +46,7 @@ def side_velocity() -> None:
     wheel = Wheel(offset=Vector(0,0))
     wheel.reset()
 
-    floor_velocity = Vector(1,0)
+    floor_velocity = Vector(0,1)
     wheel.rotation_speed = 0  # Moving forwards is negative
     print(wheel.force_exerted(floor_velocity, 0))
 
