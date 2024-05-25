@@ -22,6 +22,8 @@ class RigidBody:
         self.angular_velocity: float
         self.torque: float
 
+        self.force_pairs: list[tuple[Vector, Vector]] = []
+
     def reset(self, position: Vector = Vector(0,0), angle: float = 0) -> None:
         """Return the RigidBody to stationary."""
             
@@ -34,7 +36,7 @@ class RigidBody:
         self.torque: float = 0
     
     def point_velocity(self, offset: Vector) -> Vector:
-        """Return the velocity of the point at Vector offset from self.position."""
+        """Return the velocity of the point at relative Vector offset from self.position."""
         return self.velocity + self.angular_velocity * Vector(-offset.y, offset.x)
     
     def relative_to_world(self, vector: Vector) -> Vector:
@@ -43,7 +45,7 @@ class RigidBody:
     
     def world_to_relative(self, vector: Vector) -> Vector:
         """Convert the given Vector in the world frame to a Vector in the frame of the RigidBody."""
-        return vector.rotate_by(self.angle)
+        return vector.rotate_by(-self.angle)
     
     def add_force(self, world_force: Vector, world_offset: Vector) -> None:
         """Update self.forces and self.torque for a force acting at Vector offset
@@ -51,6 +53,8 @@ class RigidBody:
 
         self.forces += world_force
         self.torque += cross(world_offset, world_force)
+
+        self.force_pairs.append((world_force, self.position + world_offset))
         
     def update(self) -> None:
         """Update position and angle using self.forces and self.torque."""
