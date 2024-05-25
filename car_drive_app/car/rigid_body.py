@@ -36,7 +36,7 @@ class RigidBody:
         self.torque: float = 0
     
     def point_velocity(self, offset: Vector) -> Vector:
-        """Return the velocity of the point at relative Vector offset from self.position."""
+        """Return the velocity of the point at world Vector offset from self.position."""
         return self.velocity + self.angular_velocity * Vector(-offset.y, offset.x)
     
     def relative_to_world(self, vector: Vector) -> Vector:

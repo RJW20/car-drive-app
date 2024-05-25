@@ -54,18 +54,18 @@ class BaseCar(RigidBody):
         torque_applied = - self.POWER / 2  if accelerate else 0
         for wheel in self.front_wheels:
             wheel.turn_angle = max(min(wheel.turn_angle + turn.value, math.pi/3), -math.pi/3)
-            world_wheel_velocity = self.point_velocity(wheel.offset)            
+            world_wheel_offset = self.relative_to_world(wheel.offset)
+            world_wheel_velocity = self.point_velocity(world_wheel_offset)            
             relative_wheel_velocity = self.world_to_relative(world_wheel_velocity)
             relative_wheel_force = wheel.force_exerted(-1 * relative_wheel_velocity, 0)
             world_wheel_force = self.relative_to_world(relative_wheel_force)
-            world_wheel_offset = self.relative_to_world(wheel.offset)
             self.add_force(world_wheel_force, world_wheel_offset)
         for wheel in self.back_wheels:
-            world_wheel_velocity = self.point_velocity(wheel.offset)            
+            world_wheel_offset = self.relative_to_world(wheel.offset)
+            world_wheel_velocity = self.point_velocity(world_wheel_offset)           
             relative_wheel_velocity = self.world_to_relative(world_wheel_velocity)
             relative_wheel_force = wheel.force_exerted(-1 * relative_wheel_velocity, torque_applied)
             world_wheel_force = self.relative_to_world(relative_wheel_force)
-            world_wheel_offset = self.relative_to_world(wheel.offset)
             self.add_force(world_wheel_force, world_wheel_offset)
 
         drag = - self.DRAG_COEFFICIENT * self.velocity.magnitude * self.velocity
