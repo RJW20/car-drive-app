@@ -39,5 +39,18 @@ def match_floor() -> None:
         print(tyre_surface_speed)
 
 
+def side_velocity() -> None:
+    """Tests that a Wheel on a floor moving perpendicular to it has friction pulling in
+    the direction the floor is moving."""
+
+    wheel = Wheel(offset=Vector(0,0))
+    wheel.reset()
+
+    floor_velocity = Vector(1,0)
+    wheel.rotation_speed = 0  # Moving forwards is negative
+    print(wheel.force_exerted(floor_velocity, 0))
+
 if __name__ == '__main__':
-    match_floor()
+    #consant_forward()
+    #match_floor()
+    side_velocity()
