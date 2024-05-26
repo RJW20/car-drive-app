@@ -69,12 +69,14 @@ class Game:
             end_pos = w_cen - w_dir * 10
             pygame.draw.line(self.screen, 'black', (start_pos.x, start_pos.y), (end_pos.x, end_pos.y), width=10)
 
+        """
         # Draw the forces acting on the car
         for force, origin in self.car.force_pairs:
             start_pos = origin
             end_pos = origin + force * 20
             pygame.draw.line(self.screen, 'green', (start_pos.x, start_pos.y), (end_pos.x, end_pos.y), width=2)
         self.car.force_pairs = []
+        """
 
         # Show the changes
         pygame.display.flip()

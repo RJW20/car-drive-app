@@ -7,7 +7,7 @@ from car_drive_app.cartesians import Vector, dot
 class FrontWheel(BaseWheel):
     """Front Wheel of the Car."""
 
-    SIDE_FRICTION = 3
+    SIDE_FRICTION = 10
 
     def __init__(self, offset: Vector) -> None:
         super().__init__(offset)
