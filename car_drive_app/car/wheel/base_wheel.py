@@ -11,7 +11,6 @@ class BaseWheel(ABC):
     MASS = 10
     INERTIA = MASS * RADIUS ** 2 / 2
     FORWARD_FRICTION = 5
-    SIDE_FRICTION = 2
 
     def __init__(self, offset: Vector) -> None:
         self.offset: Vector = offset

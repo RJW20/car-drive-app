@@ -7,6 +7,8 @@ from car_drive_app.cartesians import Vector, dot
 class BackWheel(BaseWheel):
     """Back Wheel of the Car."""
 
+    SIDE_FRICTION = 4
+
     def side_friction(self, slip_velocity: Vector) -> float:
         """Return the magnitude of the frictional force that is acting along self.side_axis.
         

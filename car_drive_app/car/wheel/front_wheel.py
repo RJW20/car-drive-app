@@ -7,6 +7,8 @@ from car_drive_app.cartesians import Vector, dot
 class FrontWheel(BaseWheel):
     """Front Wheel of the Car."""
 
+    SIDE_FRICTION = 3
+
     def __init__(self, offset: Vector) -> None:
         super().__init__(offset)
         self._turn_angle = 0
