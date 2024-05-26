@@ -13,9 +13,15 @@ class Car(BaseCar):
 
         result = []
 
-        for wheel in self.wheels:
+        for wheel in self.front_wheels:
             w_center = self.position + self.relative_to_world(wheel.offset)
             w_direction = Vector.unit_from_angle(self.angle + wheel.turn_angle)
             result.append((w_center, w_direction))
+
+        for wheel in self.back_wheels:
+            w_center = self.position + self.relative_to_world(wheel.offset)
+            w_direction = Vector.unit_from_angle(self.angle)
+            result.append((w_center, w_direction))
+
 
         return result

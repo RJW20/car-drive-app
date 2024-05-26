@@ -1,7 +1,7 @@
 import math
 
 from car_drive_app.car.rigid_body import RigidBody
-from car_drive_app.car.wheel import Wheel
+from car_drive_app.car.wheel import BaseWheel, FrontWheel, BackWheel
 from car_drive_app.cartesians import Vector
 from car_drive_app.car.turn import Turn
 
@@ -12,17 +12,17 @@ class BaseCar(RigidBody):
     LENGTH = 80
     WIDTH = 40
     MASS = 200
-    POWER = 200
+    POWER = 400
     DRAG_COEFFICIENT = 0.8
 
     def __init__(self) -> None:
+
         # Set up the Wheels
         length_offset, width_offset = 0.4 * self.LENGTH, 0.5 * self.WIDTH
-        fr_wheel = Wheel(Vector(length_offset,width_offset))
-        fl_wheel = Wheel(Vector(length_offset,-width_offset))
-        br_wheel = Wheel(Vector(-length_offset,width_offset))
-        bl_wheel = Wheel(Vector(-length_offset,-width_offset))
-        self.wheels: list[Wheel] = [fr_wheel, fl_wheel, br_wheel, bl_wheel]
+        self.fr_wheel = FrontWheel(Vector(length_offset,width_offset))
+        self.fl_wheel = FrontWheel(Vector(length_offset,-width_offset))
+        self.br_wheel = BackWheel(Vector(-length_offset,width_offset))
+        self.bl_wheel = BackWheel(Vector(-length_offset,-width_offset))
 
         super().__init__(Vector(80,40), self.MASS + 4 * self.wheels[0].MASS)
 
@@ -39,14 +39,19 @@ class BaseCar(RigidBody):
         return Vector.unit_from_angle(self.angle)
     
     @property
-    def front_wheels(self) -> list[Wheel]:
+    def front_wheels(self) -> list[FrontWheel]:
         """Return the front Wheels of the Car."""
-        return self.wheels[:2]
+        return [self.fr_wheel, self.fl_wheel]
     
     @property
-    def back_wheels(self) -> list[Wheel]:
+    def back_wheels(self) -> list[BackWheel]:
         """Return the back Wheels of the Car."""
-        return self.wheels[2:]
+        return [self.br_wheel, self.bl_wheel]
+    
+    @property
+    def wheels(self) -> list[BaseWheel]:
+        """Return the Wheels of the Car."""
+        return self.front_wheels + self.back_wheels
 
     def move(self, turn: Turn, accelerate: bool) -> None:
         """Advance the Car one frame."""

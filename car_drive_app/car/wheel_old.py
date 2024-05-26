@@ -8,8 +8,8 @@ class Wheel:
     RADIUS = 5
     MASS = 10
     INERTIA = MASS * RADIUS ** 2 / 2
-    SIDE_FRICTION = 2
-    FORWARD_FRICTION = 1
+    SIDE_FRICTION = 6
+    FORWARD_FRICTION = 5
 
     def __init__(self, offset: Vector) -> None:
         self.offset: Vector = offset
