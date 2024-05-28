@@ -27,6 +27,9 @@ class Vector:
     def __rtruediv__(self, other: float) -> Vector:
         return Vector(self.x / other, self.y / other)
     
+    def __eq__(self, other: Vector) -> bool:
+        return self.x == other.x and self.y == other.y
+    
     def __str__(self) -> str:
         return f'({self.x}, {self.y})'
     
