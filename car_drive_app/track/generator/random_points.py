@@ -1,7 +1,6 @@
 import random
 
 from car_drive_app.cartesians import Vector
-from car_drive_app.track.track import Track
 
 
 def random_points(dimensions: Vector) -> list[Vector]:
@@ -24,13 +23,3 @@ def random_points(dimensions: Vector) -> list[Vector]:
     points = [Vector(random.randint(1,dimensions.x-1), random.randint(1,dimensions.y-1)) for _ in range(num_points)]
     
     return points
-
-
-def generator(dimensions: Vector) -> Track:
-    """Return a Track that fits on the plane of given dimensions."""
-
-    # Generate random points
-    # Get the convex hull using gift wrapping algorithm
-    # Compute midpoints and randomly displace them
-    # Push apart and fix angles
-    # Add splines
