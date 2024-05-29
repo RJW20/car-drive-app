@@ -1,7 +1,6 @@
 
 import random
 import math
-from typing import Annotated, ValueRange
 
 from car_drive_app.cartesians import Vector
 
@@ -12,7 +11,7 @@ def midpoint(vec1: Vector, vec2: Vector) -> Vector:
 
 
 def displacement_vector(
-    severity: Annotated[float, ValueRange(0.0, 1.0)],
+    severity: float,
     max_length: float,
 ) -> Vector:
     """Return a displacement Vector with given severity.
@@ -28,7 +27,7 @@ def displacement_vector(
 
 def displaced_midpoints(
     points: list[Vector],
-    severity: Annotated[float, ValueRange(0.0, 1.0)],
+    severity: float,
     max_displacement: float,
 ) -> list[Vector]:
     """Return a list of points containing the input points as well as points that
