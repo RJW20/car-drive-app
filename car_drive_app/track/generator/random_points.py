@@ -14,7 +14,7 @@ def random_points(dimensions: Vector) -> list[Vector]:
     # Calculate the number of points to generate
     area = dimensions.x * dimensions.y
     min_points = area // 80 ** 2
-    if min_points < 10:
+    if min_points < 9:
         raise ValueError(f'Dimensions {dimensions} is too small to generate a track on.')
     max_points = area // 50 ** 2
     num_points = random.randint(min_points, max_points)

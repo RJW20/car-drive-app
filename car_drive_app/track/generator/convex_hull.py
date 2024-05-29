@@ -45,11 +45,11 @@ def convex_hull(points: list[Vector]) -> list[Vector]:
     choice = next_most_left(start, possible_next)
     hull.append(choice)
 
-    # Iterate throught till back at the start
+    # Iterate through till back at the start
     while not choice == start:
         possible_next = points[:]
         possible_next.remove(choice)
-        choice = next_most_left(start, possible_next)
+        choice = next_most_left(choice, possible_next)
         hull.append(choice)
     
     return hull
