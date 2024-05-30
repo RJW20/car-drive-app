@@ -41,10 +41,13 @@ def displaced_midpoints(
     points_and_disp_mids = []
 
     N = len(points)
-    for i, point in enumerate(points):
+    for i, point in enumerate(points[:-1]):
         next_point = points[(i+1)%N]
         m_p = midpoint(point, next_point)
         displacement = displacement_vector(severity, max_displacement)
         points_and_disp_mids.extend([point, m_p + displacement])
+
+    # Reclose the loop
+    points_and_disp_mids.append(points[0])
 
     return points_and_disp_mids
