@@ -31,9 +31,27 @@ class Creator:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 pos = pygame.mouse.get_pos()
                 pos = Vector(pos[0], pos[1])
-                for i, point in enumerate(self.points):
+                for point in self.points:
                     if point.contains(pos):
-                        print(i)
+                        point.dragging = True
+                        break
+
+            elif event.type == pygame.MOUSEBUTTONUP:
+                for point in self.points:
+                    point.dragging = False
+
+    def update(self) -> None:
+        """Update to the next frame.
+        
+        Move any control points being dragged.
+        """
+
+        for point in self.points:
+            if point.dragging:
+                pos = pygame.mouse.get_pos()
+                point.x, point.y = pos
+                self.full_curve = catmull_rom(self.points, 100)
+                
 
     def draw_track(self) -> None:
         """Draw self.full_curve and self.points."""
@@ -55,6 +73,7 @@ class Creator:
 
         while True:
             self.check_events()
+            self.update()
             self.draw_track()
             self.clock.tick(60)
 
