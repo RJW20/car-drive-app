@@ -22,7 +22,7 @@ def draw_track_generation() -> None:
     points = random_points(dimensions, 3 * car_scale_length)
     c_hull = convex_hull(points)
     points_and_mps = displaced_midpoints(c_hull, 1, 2 * car_scale_length)
-    full_curve = catmull_rom(points_and_mps, car_scale_length)
+    full_curve = catmull_rom(points_and_mps, 100)
 
     while True:
 
