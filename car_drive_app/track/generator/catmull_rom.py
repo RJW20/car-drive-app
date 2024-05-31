@@ -6,7 +6,7 @@ def interpolation_point(t: float, points: list[Vector], time_intervals: list[flo
 
     A = [((time_intervals[i+1]-t) * points[i] + (t-time_intervals[i]) * points[i+1]) / (time_intervals[i+1] - time_intervals[i]) for i in range(3)]
     B = [((time_intervals[i+2]-t) * A[i] + (t-time_intervals[i]) * A[i+1]) / (time_intervals[i+2] - time_intervals[i]) for i in range(2)]
-    C = ((time_intervals[3]-t) * B[0] + (t-time_intervals[0]) * B[1]) / (time_intervals[3] - time_intervals[0])
+    C = ((time_intervals[2]-t) * B[0] + (t-time_intervals[1]) * B[1]) / (time_intervals[2] - time_intervals[1])
     return C
 
 
