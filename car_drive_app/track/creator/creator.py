@@ -1,6 +1,7 @@
 import pygame
 
 from car_drive_app.cartesians import Vector
+from car_drive_app.track.creator.control_point import ControlPoint
 from car_drive_app.track.creator.corner_points import corner_points
 from car_drive_app.track.creator.catmull_rom import catmull_rom
 
@@ -9,6 +10,8 @@ class Creator:
     """Class for creating Tracks."""
 
     def __init__(self, dimensions: Vector) -> None:
+
+        self.dimensions = dimensions
 
         # Pygame set up
         self.screen = pygame.display.set_mode((dimensions.x, dimensions.y))
@@ -28,7 +31,7 @@ class Creator:
                 pygame.quit()
                 exit()
 
-            if event.type == pygame.MOUSEBUTTONDOWN:
+            elif event.type == pygame.MOUSEBUTTONDOWN:
                 pos = pygame.mouse.get_pos()
                 pos = Vector(pos[0], pos[1])
                 for point in self.points:
@@ -39,6 +42,11 @@ class Creator:
             elif event.type == pygame.MOUSEBUTTONUP:
                 for point in self.points:
                     point.dragging = False
+
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    self.points.append(ControlPoint(self.dimensions.x // 2, self.dimensions.y // 2))
+                    self.full_curve = catmull_rom(self.points, 100)
 
     def update(self) -> None:
         """Update to the next frame.
