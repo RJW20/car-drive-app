@@ -68,7 +68,7 @@ class Creator:
 
         # Draw the curve
         for point in self.full_curve:
-            pygame.draw.circle(self.screen, 'grey', (point.x, point.y), 20)
+            pygame.draw.circle(self.screen, 'grey', (point.x, point.y), 60)
 
         # Draw all the control points
         for point in self.points:
@@ -87,5 +87,5 @@ class Creator:
 
 
 if __name__ == '__main__':
-    cr = Creator(Vector(1200, 800))
+    cr = Creator(Vector(1500, 900))
     cr.run()
