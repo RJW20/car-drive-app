@@ -51,8 +51,12 @@ class Creator:
                     self.full_curve = curve_finder(self.points)
 
                 elif event.key == pygame.K_RIGHT or event.key == pygame.K_LEFT:
-                    selected_point =  [point for point in self.points if point.selected][0]
-                    selected_point.orientation *= -1
+                    try:
+                        selected_point =  [point for point in self.points if point.selected][0]
+                        selected_point.orientation *= -1
+                        self.full_curve = curve_finder(self.points)
+                    except IndexError:
+                        pass
 
     def update(self) -> None:
         """Update to the next frame.
@@ -74,7 +78,7 @@ class Creator:
 
         # Draw the curve
         for point in self.full_curve:
-            pygame.draw.circle(self.screen, 'grey', (point.x, point.y), 60)
+            pygame.draw.circle(self.screen, 'grey', (point.x, point.y), 5)
 
         # Draw all the control points
         for point in self.points:

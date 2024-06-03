@@ -89,7 +89,7 @@ def curve_finder(points: list[ControlPoint]) -> list[Vector]:
         # Linearly interpolate between the connection points at reasonable density
         curve.extend(interpolate(current_point.turning_point_at(current_out_angle), next_point.turning_point_at(next_in_angle)))
 
-        current_in_angle = current_out_angle
+        current_in_angle = next_in_angle
 
     # Find the angle to connect at last and first points
     pn_out_angle, p0_in_angle = connection_angles(points[-1], points[0])
