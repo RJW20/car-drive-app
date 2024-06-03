@@ -1,13 +1,13 @@
 import pygame
 
 from car_drive_app.cartesians import Vector
-from car_drive_app.track.creator.control_point import ControlPoint
-from car_drive_app.track.creator.corner_points import corner_points
-from car_drive_app.track.creator.catmull_rom import catmull_rom
+from car_drive_app.track.creator.points_and_splines.control_point import ControlPoint
+from car_drive_app.track.creator.points_and_splines.corner_points import corner_points
+from car_drive_app.track.creator.points_and_splines.catmull_rom import catmull_rom
 
 
 class Creator:
-    """Class for creating Tracks."""
+    """Class for creating Tracks using points and splines."""
 
     def __init__(self, dimensions: Vector) -> None:
 

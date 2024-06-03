@@ -1,5 +1,5 @@
 from car_drive_app.cartesians import Vector
-from car_drive_app.track.creator.control_point import ControlPoint
+from car_drive_app.track.creator.points_and_splines.control_point import ControlPoint
 
 
 def corner_points(dimensions: Vector) -> list[ControlPoint]:
