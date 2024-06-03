@@ -23,7 +23,7 @@ class Creator:
         self.full_curve = curve_finder(self.points)
 
     def check_events(self) -> None:
-        """Check for mouse clicks for quitting, dragging and new points."""
+        """Check for mouse clicks for quitting, dragging, changing orientation/radius and new points."""
 
         # Allow quitting
         for event in pygame.event.get():
@@ -58,6 +58,29 @@ class Creator:
                     except IndexError:
                         pass
 
+                elif event.key == pygame.K_UP:
+                    try:
+                        selected_point =  [point for point in self.points if point.selected][0]
+                        selected_point.turn_radius += 1
+                        self.full_curve = curve_finder(self.points)
+                    except IndexError:
+                        pass
+                elif event.key == pygame.K_DOWN:
+                    try:
+                        selected_point =  [point for point in self.points if point.selected][0]
+                        selected_point.turn_radius -= 1
+                        selected_point.turn_radius = max(selected_point.turn_radius, 1)
+                        self.full_curve = curve_finder(self.points)
+                    except IndexError:
+                        pass
+                elif event.key == pygame.K_r:
+                    try:
+                        selected_point =  [point for point in self.points if point.selected][0]
+                        selected_point.turn_radius = 100
+                        self.full_curve = curve_finder(self.points)
+                    except IndexError:
+                        pass
+
     def update(self) -> None:
         """Update to the next frame.
         
@@ -78,7 +101,7 @@ class Creator:
 
         # Draw the curve
         for point in self.full_curve:
-            pygame.draw.circle(self.screen, 'grey', (point.x, point.y), 5)
+            pygame.draw.circle(self.screen, 'grey', (point.x, point.y), 60)
 
         # Draw all the control points
         for point in self.points:

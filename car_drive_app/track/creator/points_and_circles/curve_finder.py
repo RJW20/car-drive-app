@@ -12,8 +12,8 @@ def connection_angles(p1: ControlPoint, p2: ControlPoint) -> tuple[float,float]:
     in 2D space and point from p1 to p2.
     """
 
-    for theta in range(0,360):
-        theta_1 = math.pi/180 * theta
+    for theta in range(0,720):
+        theta_1 = math.pi/360 * theta
         direction = p1.tangent_at(theta_1)
         theta_2 = (theta_1 + math.pi) % (2 * math.pi) if not p1.orientation == p2.orientation else theta_1  # Ensures tangents point in the same direction
         vec_between = p2.turning_point_at(theta_2) - p1.turning_point_at(theta_1)
