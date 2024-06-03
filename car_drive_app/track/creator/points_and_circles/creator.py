@@ -37,7 +37,9 @@ class Creator:
                 for point in self.points:
                     if point.contains(pos):
                         point.dragging = True
-                        break
+                        point.selected = True
+                    else:
+                        point.selected = False
 
             elif event.type == pygame.MOUSEBUTTONUP:
                 for point in self.points:
@@ -68,7 +70,7 @@ class Creator:
 
         # Draw the curve
         for point in self.full_curve:
-            pygame.draw.circle(self.screen, 'grey', (point.x, point.y), 5)
+            pygame.draw.circle(self.screen, 'grey', (point.x, point.y), 60)
 
         # Draw all the control points
         for point in self.points:

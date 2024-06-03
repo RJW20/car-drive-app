@@ -14,10 +14,12 @@ class ControlPoint(Vector):
 
     def __init__(self, x: float, y: float, radius: float = 10) -> None:
         super().__init__(x, y)
-        self.radius: float = radius
-        self.dragging: bool = False
         self.turn_radius: int = 100
         self.orientation: int = -1
+
+        self.radius: float = radius
+        self.dragging: bool = False
+        self.selected: bool = False
 
     def turning_point_at(self, angle: float) -> Vector:
         """Return the point at the polar coordinate (self.turn_radius, angle) from self."""
@@ -37,4 +39,8 @@ class ControlPoint(Vector):
 
     def draw(self, screen: pygame.Surface) -> None:
         """Draw a white circle at self.x, self.y with radius self.radius."""
-        pygame.draw.circle(screen, 'white', (self.x, self.y), self.radius)
+
+        if not self.selected:
+            pygame.draw.circle(screen, 'white', (self.x, self.y), self.radius)
+        else:
+            pygame.draw.circle(screen, 'black', (self.x, self.y), self.radius)
