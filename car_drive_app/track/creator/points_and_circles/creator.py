@@ -50,6 +50,10 @@ class Creator:
                     self.points.append(ControlPoint(self.dimensions.x // 2, self.dimensions.y // 2))
                     self.full_curve = curve_finder(self.points)
 
+                elif event.key == pygame.K_RIGHT or event.key == pygame.K_LEFT:
+                    selected_point =  [point for point in self.points if point.selected][0]
+                    selected_point.orientation *= -1
+
     def update(self) -> None:
         """Update to the next frame.
         
