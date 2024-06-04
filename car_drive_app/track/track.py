@@ -1,3 +1,4 @@
+from __future__ import annotations
 import pickle
 from pathlib import Path
 
@@ -17,7 +18,7 @@ class Track(BaseTrack):
             pygame.draw.circle(screen, 'grey', (point.x, point.y), 60)
 
     @classmethod
-    def load(cls) -> BaseTrack:
+    def load(cls) -> Track:
 
         source = Path('track.pickle')
 
