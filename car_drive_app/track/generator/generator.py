@@ -1,9 +1,9 @@
 from car_drive_app.cartesians import Vector
-from car_drive_app.track.track import Track
+from car_drive_app.track.base_track import BaseTrack
 
 
-def generator(dimensions: Vector) -> Track:
-    """Return a Track that fits on the plane of given dimensions."""
+def generator(dimensions: Vector) -> BaseTrack:
+    """Return a BaseTrack that fits on the plane of given dimensions."""
 
     # Generate random points
     # Get the convex hull using gift wrapping algorithm
