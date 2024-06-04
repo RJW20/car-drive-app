@@ -1,6 +1,7 @@
 import pygame
 
-from car_drive_app.car.car import Car
+from car_drive_app.track import Track
+from car_drive_app.car import Car
 from car_drive_app.cartesians import Vector
 from car_drive_app.car import Turn
 
@@ -8,16 +9,20 @@ from car_drive_app.car import Turn
 class Game:
     """Controller of all game objects."""
 
-    def __init__(self, settings: dict) -> None:
-        
-        # Pygame set up
-        self.screen = pygame.display.set_mode(settings['dimensions'])
-        pygame.display.set_caption("Car Drive")
-        self.clock = pygame.time.Clock()
+    def __init__(self) -> None:
+
+        # Load the Track
+        self.track = Track.load()
 
         # Start the Car
         self.car = Car()
         self.car.reset(position=Vector(200,200), angle=0)
+        
+        # Pygame set up
+        self.dimensions = self.track.dimensions
+        self.screen = pygame.display.set_mode((self.dimensions.x, self.dimensions.y))
+        pygame.display.set_caption("Car Drive")
+        self.clock = pygame.time.Clock()
 
     def check_move(self) -> tuple[Turn, bool]:
         """Check for new user input and convert to valid move."""
@@ -56,7 +61,10 @@ class Game:
         """Draw the current frame to the screen."""
 
         # Wipe the last frame
-        self.screen.fill('white')
+        self.screen.fill('green')
+
+        # Draw the Track
+        self.track.draw(self.screen)
 
         # Draw the Car
         pygame.draw.circle(self.screen, 'red', (self.car.position.x, self.car.position.y), 5)
