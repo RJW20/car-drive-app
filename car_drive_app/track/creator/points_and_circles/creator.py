@@ -1,5 +1,6 @@
 import pygame
 
+from car_drive_app.track.base_track import BaseTrack
 from car_drive_app.cartesians import Vector
 from car_drive_app.track.creator.points_and_circles.control_point import ControlPoint
 from car_drive_app.track.creator.points_and_circles.corner_points import corner_points
@@ -22,8 +23,11 @@ class Creator:
         self.points = corner_points(dimensions)
         self.full_curve = curve_finder(self.points)
 
-    def check_events(self) -> None:
-        """Check for mouse clicks for quitting, dragging, changing orientation/radius and new points."""
+    def check_events(self) -> bool:
+        """Check for mouse clicks for quitting, dragging, changing orientation/radius and new points.
+        
+        Returns True if the return key is pressed.
+        """
 
         # Allow quitting
         for event in pygame.event.get():
@@ -31,6 +35,7 @@ class Creator:
                 pygame.quit()
                 exit()
 
+            # Dragging
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 pos = pygame.mouse.get_pos()
                 pos = Vector(pos[0], pos[1])
@@ -40,16 +45,18 @@ class Creator:
                         point.selected = True
                     else:
                         point.selected = False
-
             elif event.type == pygame.MOUSEBUTTONUP:
                 for point in self.points:
                     point.dragging = False
 
             elif event.type == pygame.KEYDOWN:
+
+                # New ControlPoint
                 if event.key == pygame.K_SPACE:
                     self.points.append(ControlPoint(self.dimensions.x // 2, self.dimensions.y // 2))
                     self.full_curve = curve_finder(self.points)
 
+                # Switching orientation
                 elif event.key == pygame.K_RIGHT or event.key == pygame.K_LEFT:
                     try:
                         selected_point =  [point for point in self.points if point.selected][0]
@@ -58,6 +65,7 @@ class Creator:
                     except IndexError:
                         pass
 
+                # Alter turn radius
                 elif event.key == pygame.K_UP:
                     try:
                         selected_point =  [point for point in self.points if point.selected][0]
@@ -80,6 +88,12 @@ class Creator:
                         self.full_curve = curve_finder(self.points)
                     except IndexError:
                         pass
+
+                # Conclude Track drawing
+                elif event.key == pygame.K_RETURN:
+                    return True
+                
+        return False
 
     def update(self) -> None:
         """Update to the next frame.
@@ -109,15 +123,45 @@ class Creator:
 
         pygame.display.flip()
 
+    def start_point(self) -> int | None:
+        """Return the index of the point on self.full_curve that's closest to the mouse click
+        if applicable."""
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT: 
+                pygame.quit()
+                exit()
+
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                pos = pygame.mouse.get_pos()
+                pos = Vector(pos[0], pos[1])
+                distance = self.dimensions.magnitude
+                closest = None
+                for i, point in enumerate(self.full_curve):
+                    if (pos - point).magnitude < distance:
+                        distance = (pos - point).magnitude
+                        closest = i
+
+                return closest
+            
+        return None
+            
     def run(self) -> None:
         """Run the main loop."""
 
-        while True:
-            self.check_events()
+        # Create the Track
+        while not self.check_events():
             self.update()
             self.draw_track()
             self.clock.tick(60)
 
+        # Get the start line index position
+        while not (start := self.start_point()):
+            self.clock.tick(60)
+
+        # Create/save a Track
+        track = BaseTrack(self.dimensions, self.full_curve, 60)
+        track.save()
 
 if __name__ == '__main__':
     cr = Creator(Vector(1500, 900))
