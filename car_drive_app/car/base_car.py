@@ -24,10 +24,11 @@ class BaseCar(RigidBody):
         self.br_wheel = BackWheel(Vector(-length_offset,width_offset))
         self.bl_wheel = BackWheel(Vector(-length_offset,-width_offset))
 
+        # Set up the RigidBody
         super().__init__(Vector(80,40), self.MASS + 4 * self.wheels[0].MASS)
 
     def reset(self, position: Vector = Vector(0,0), angle: float = 0) -> None:
-        """Return the Car to the start point."""
+        """Return the Car to the given start point."""
 
         super().reset(position, angle)
         for wheel in self.wheels:
