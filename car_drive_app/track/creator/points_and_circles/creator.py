@@ -174,8 +174,3 @@ class Creator:
         # Create/save a Track
         track = BaseTrack(self.dimensions, self.full_curve, 120)
         track.save()
-
-
-if __name__ == '__main__':
-    cr = Creator(Vector(1500, 900))
-    cr.run()
