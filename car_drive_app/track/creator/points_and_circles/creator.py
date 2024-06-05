@@ -107,7 +107,6 @@ class Creator:
                 point.x, point.y = pos
                 self.full_curve = curve_finder(self.points)
                 
-
     def draw_track(self) -> None:
         """Draw self.full_curve and self.points."""
 
@@ -122,10 +121,17 @@ class Creator:
             point.draw(self.screen)
 
         pygame.display.flip()
+    
+    def create_track(self) -> None:
+        """Allow the user to create the Track in self.full_curve."""
 
-    def start_point(self) -> int | None:
-        """Return the index of the point on self.full_curve that's closest to the mouse click
-        if applicable."""
+        while not self.check_events():
+            self.update()
+            self.draw_track()
+            self.clock.tick(60)
+
+    def check_mouse_click(self) -> tuple[int,int] | None:
+        """Return the coordinates of a mouse click if applicable."""
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT: 
@@ -133,36 +139,44 @@ class Creator:
                 exit()
 
             elif event.type == pygame.MOUSEBUTTONDOWN:
-                pos = pygame.mouse.get_pos()
-                pos = Vector(pos[0], pos[1])
-                distance = self.dimensions.magnitude
-                closest = None
-                for i, point in enumerate(self.full_curve):
-                    if (pos - point).magnitude < distance:
-                        distance = (pos - point).magnitude
-                        closest = i
-
-                return closest
+                return pygame.mouse.get_pos()
             
         return None
+    
+    def set_start_point(self) -> None:
+        """Allow the user to select the start point location.
+        
+        Rotates self.full_curve so that the chosen start point is the first one.
+        """
+
+        # Await a mouse click
+        while not (pos := self.check_mouse_click()):
+            self.clock.tick(60)
+
+        # Find the point on the curve closest to the position clicked
+        pos = Vector(pos[0], pos[1])
+        distance = self.dimensions.magnitude
+        closest = None
+        for i, point in enumerate(self.full_curve):
+            if (pos - point).magnitude < distance:
+                distance = (pos - point).magnitude
+                closest = i
+
+        # Roate the deque
+        self.full_curve.rotate(closest)
             
     def run(self) -> None:
         """Run the main loop."""
 
-        # Create the Track
-        while not self.check_events():
-            self.update()
-            self.draw_track()
-            self.clock.tick(60)
+        self.create_track()
+        self.set_start_point()
 
-        # Allow the user to set the start point and rotate the self.full_curve so the start is the first one
-        while not (start := self.start_point()):
-            self.clock.tick(60)
-        self.full_curve.rotate(start)
 
         # Create/save a Track
         track = BaseTrack(self.dimensions, self.full_curve, 60)
         track.save()
+
+
 
 if __name__ == '__main__':
     cr = Creator(Vector(1500, 900))
