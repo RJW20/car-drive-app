@@ -4,6 +4,7 @@ import pickle
 from pathlib import Path
 
 from car_drive_app.cartesians import Vector
+from car_drive_app.track.gate import Gate
 
 
 class BaseTrack:
@@ -13,6 +14,15 @@ class BaseTrack:
         self.dimensions: Vector = dimensions
         self.center_line: deque[Vector] = center_line
         self.radius: int = width // 2
+
+        self.gates = []
+        for i in range(0, len(self.center_line), 5):
+            try:
+                direction = self.center_line[i+1] - self.center_line[i]
+            except IndexError:
+                direction = self.center_line[0] - self.center_line[i]
+            finally:
+                self.gates.append(Gate(i, direction))
 
     def check_collision(self, outline: list[Vector]) -> bool:
         """Return True if the outline given has any points not on the driveable section

@@ -171,11 +171,9 @@ class Creator:
         self.create_track()
         self.set_start_point()
 
-
         # Create/save a Track
         track = BaseTrack(self.dimensions, self.full_curve, 60)
         track.save()
-
 
 
 if __name__ == '__main__':
