@@ -163,7 +163,7 @@ class Creator:
                 closest = i
 
         # Roate the deque
-        self.full_curve.rotate(closest)
+        self.full_curve.rotate(-1 * closest)
             
     def run(self) -> None:
         """Run the main loop."""
