@@ -15,7 +15,7 @@ class Track(BaseTrack):
         for every point in self.center_line."""
 
         for point in self.center_line:
-            pygame.draw.circle(screen, 'grey', (point.x, point.y), 60)
+            pygame.draw.circle(screen, 'grey', (point.x, point.y), self.radius)
 
     @classmethod
     def load(cls) -> Track:

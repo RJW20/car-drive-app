@@ -172,7 +172,7 @@ class Creator:
         self.set_start_point()
 
         # Create/save a Track
-        track = BaseTrack(self.dimensions, self.full_curve, 60)
+        track = BaseTrack(self.dimensions, self.full_curve, 120)
         track.save()
 
 
