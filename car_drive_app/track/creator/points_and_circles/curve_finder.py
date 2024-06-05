@@ -1,4 +1,5 @@
 import math
+from collections import deque
 
 from car_drive_app.cartesians import Vector, cross, dot
 from car_drive_app.track.creator.points_and_circles.control_point import ControlPoint
@@ -64,14 +65,14 @@ def interpolate(p1: Vector, p2: Vector) -> list[Vector]:
     return [p1 + t * step for t in range(0,int(vec_between.magnitude//2))]
     
 
-def curve_finder(points: list[ControlPoint]) -> list[Vector]:
+def curve_finder(points: list[ControlPoint]) -> deque[Vector]:
     """Return the list of Vectors that make up the points and circles interpolation curve of the 
     given points.
     
     points should not form a closed loop, but the resultant curve will be.
     """
 
-    curve = []
+    curve = deque()
     
     # Find the angle to connect at first two points
     p0_out_angle, p1_in_angle = connection_angles(points[0], points[1])

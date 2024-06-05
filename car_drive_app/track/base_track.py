@@ -1,6 +1,5 @@
 from __future__ import annotations
-from functools import cached_property
-import math
+from collections import deque
 import pickle
 from pathlib import Path
 
@@ -10,33 +9,15 @@ from car_drive_app.cartesians import Vector
 class BaseTrack:
     """The underlying attributes of the Track the Car drives on."""
 
-    def __init__(self, dimensions: Vector, center_line: list[Vector], width: int) -> None:
+    def __init__(self, dimensions: Vector, center_line: deque[Vector], width: int) -> None:
         self.dimensions: Vector = dimensions
-        self.center_line: list[Vector] = center_line
+        self.center_line: deque[Vector] = center_line
         self.radius: int = width // 2
-
-    @cached_property
-    def driveable_area(self) -> set[Vector]:
-        """Return a set of all the positions on the driveable track as Vectors."""
-
-        d_a = set()
-
-        for point in self.center_line:
-            for y in range(-1 * self.radius, self.radius + 1):
-                x_range = math.ceil(math.sqrt(self.radius ** 2 - y ** 2))
-                for x in range(-1 * x_range, x_range + 1):
-                    d_a.add(point + Vector(x,y))
-
-        return d_a
 
     def check_collision(self, outline: list[Vector]) -> bool:
         """Return True if the outline given has any points not on the driveable section
         of the Track."""
 
-        for point in outline:
-            if point not in self.driveable_area:
-                return True
-            
         return False
 
     def save(self) -> None:

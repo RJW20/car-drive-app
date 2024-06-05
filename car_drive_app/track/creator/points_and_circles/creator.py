@@ -155,9 +155,10 @@ class Creator:
             self.draw_track()
             self.clock.tick(60)
 
-        # Get the start line index position
+        # Allow the user to set the start point and rotate the self.full_curve so the start is the first one
         while not (start := self.start_point()):
             self.clock.tick(60)
+        self.full_curve.rotate(start)
 
         # Create/save a Track
         track = BaseTrack(self.dimensions, self.full_curve, 60)
