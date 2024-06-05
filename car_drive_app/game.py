@@ -1,3 +1,5 @@
+import math
+
 import pygame
 
 from car_drive_app.track import Track
@@ -16,7 +18,7 @@ class Game:
 
         # Start the Car
         self.car = Car()
-        self.car.reset(position=Vector(200,200), angle=0)
+        self.track.place_car_at_start(self.car)
         
         # Pygame set up
         self.dimensions = self.track.dimensions
@@ -32,10 +34,6 @@ class Game:
             if event.type == pygame.QUIT: 
                 pygame.quit()
                 exit()
-
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_b:
-                    self.car.reset(position=Vector(200,200))
 
         # Check for key input
         keys = pygame.key.get_pressed()
@@ -56,6 +54,8 @@ class Game:
         """Advance to the next frame."""
 
         self.car.move(turn, accelerate)
+        if self.track.check_collision(self.car.outline):
+            self.car.reset(position=Vector(400,820), angle=0)
 
     def update_screen(self) -> None:
         """Draw the current frame to the screen."""
@@ -65,6 +65,14 @@ class Game:
 
         # Draw the Track
         self.track.draw(self.screen)
+
+        # Draw the track gates
+        for gate in self.track.gates:
+            center = self.track.center_line[gate.index]
+            direction = gate.direction.rotate_by(math.pi/2)
+            start_pos = center - direction * self.track.radius * 1.2
+            end_pos = center + direction * self.track.radius * 1.2
+            pygame.draw.line(self.screen, 'blue', (start_pos.x, start_pos.y), (end_pos.x, end_pos.y), width=4)
 
         # Draw the Car
         pygame.draw.circle(self.screen, 'red', (self.car.position.x, self.car.position.y), 5)

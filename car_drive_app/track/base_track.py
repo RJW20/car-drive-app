@@ -1,5 +1,6 @@
 from __future__ import annotations
 from collections import deque
+import math
 import pickle
 from pathlib import Path
 
@@ -16,14 +17,26 @@ class BaseTrack:
         self.center_line: deque[Vector] = center_line
         self.radius: int = width // 2
 
+        # Create a list of Gates around the Track
         self.gates: list[Gate] = []
         for i in range(0, len(self.center_line) - self.radius + 1, self.radius):
             direction = self.center_line[i+1] - self.center_line[i]
             self.gates.append(Gate(i, direction))
+        self.current_gate: int  # The Gate index
 
     def car_start_position(self, car: BaseCar) -> Vector:
         """Return the position the Car should start at."""
         return self.center_line[0] - self.gates[0].direction * car.LENGTH * 0.5
+    
+    def car_start_direction(self, car: BaseCar) -> float:
+        """Return the angle the Car should start pointing in."""
+        return math.atan(self.gates[0].direction.y/self.gates[1].direction.x)
+    
+    def place_car_at_start(self, car: BaseCar) -> Vector:
+        """Reset the Car just behind the startline."""
+
+        car.reset(position=self.car_start_position(car), angle=self.car_start_direction(car))
+        self.current_gate = 0
 
     def check_collision(self, outline: list[Vector]) -> bool:
         """Return True if the outline given has any points not on the driveable section
