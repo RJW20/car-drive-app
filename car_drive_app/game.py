@@ -66,6 +66,10 @@ class Game:
         # Draw the Track
         self.track.draw(self.screen)
 
+        # Draw the points we're currently tracking collisions using
+        for point in self.track.enclosed_center_line:
+            pygame.draw.circle(self.screen, 'purple', (point.x, point.y), 5)
+
         # Draw the track gates
         for gate in self.track.gates:
             center = self.track.center_line[gate.index]
