@@ -33,7 +33,12 @@ class BaseTrack:
     @property
     def car_start_direction(self) -> float:
         """Return the angle the Car should start pointing in."""
-        return math.atan(self.gates[0].direction.y/self.gates[1].direction.x)
+        
+        direction = self.gates[0].direction
+        if direction.x > 0:
+            return math.atan(direction.y/direction.x)
+        else:
+            return math.pi - math.atan(direction.y/direction.x)
     
     def place_car_at_start(self, car: BaseCar) -> Vector:
         """Reset the Car just behind the startline."""

@@ -4,7 +4,6 @@ import pygame
 
 from car_drive_app.track import Track
 from car_drive_app.car import Car
-from car_drive_app.cartesians import Vector
 from car_drive_app.car import Turn
 
 
