@@ -54,8 +54,9 @@ class Game:
         """Advance to the next frame."""
 
         self.car.move(turn, accelerate)
-        if self.track.check_collision(self.car.outline):
-            self.car.reset(position=Vector(400,820), angle=0)
+        self.track.update_gate(self.car)
+        if self.track.check_in_bounds(self.car.outline):
+            self.track.place_car_at_start(self.car)
 
     def update_screen(self) -> None:
         """Draw the current frame to the screen."""
