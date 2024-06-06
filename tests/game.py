@@ -3,8 +3,9 @@ import math
 
 import pygame
 
-from car_drive_app.track import Track
-from car_drive_app.car import Car, Turn, Acceleration
+from car_drive_app.track.track import Track
+from car_drive_app.car.car import Car
+from car_drive_app.car import Turn, Acceleration
 
 
 class Game:
