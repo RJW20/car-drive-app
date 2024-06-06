@@ -14,7 +14,7 @@ class ControlPoint(Vector):
 
     def __init__(self, x: float, y: float, radius: float = 10) -> None:
         super().__init__(x, y)
-        self.turn_radius: int = 100
+        self.turn_radius: int = 120
         self.orientation: int = -1
 
         self.radius: float = radius

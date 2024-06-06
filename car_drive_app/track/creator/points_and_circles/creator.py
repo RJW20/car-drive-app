@@ -10,6 +10,8 @@ from car_drive_app.track.creator.points_and_circles.curve_finder import curve_fi
 class Creator:
     """Class for creating Tracks using points and circles around them."""
 
+    TRACK_WIDTH = 150
+
     def __init__(self, dimensions: Vector) -> None:
 
         self.dimensions = dimensions
@@ -21,7 +23,7 @@ class Creator:
         self.clock = pygame.time.Clock()
 
         # Set up initial basic loop
-        self.points = corner_points(dimensions)
+        self.points = corner_points(dimensions, int(self.TRACK_WIDTH * 1.5))
         self.full_curve = curve_finder(self.points)
 
     def check_events(self) -> bool:
@@ -116,7 +118,7 @@ class Creator:
 
         # Draw the curve
         for point in self.full_curve:
-            pygame.draw.circle(self.screen, 'grey', (point.x, point.y), 60)
+            pygame.draw.circle(self.screen, 'grey', (point.x, point.y), self.TRACK_WIDTH // 2)
 
         # Draw all the control points
         for point in self.points:
@@ -174,5 +176,5 @@ class Creator:
         self.set_start_point()
 
         # Create/save a Track
-        track = BaseTrack(self.dimensions, self.full_curve, 120)
+        track = BaseTrack(self.dimensions, self.full_curve, self.TRACK_WIDTH)
         track.save()
