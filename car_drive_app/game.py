@@ -3,8 +3,7 @@ import math
 import pygame
 
 from car_drive_app.track import Track
-from car_drive_app.car import Car
-from car_drive_app.car import Turn
+from car_drive_app.car import Car, Turn, Acceleration
 
 
 class Game:
@@ -26,7 +25,7 @@ class Game:
         pygame.display.set_caption("Car Drive")
         self.clock = pygame.time.Clock()
 
-    def check_move(self) -> tuple[Turn, bool]:
+    def check_move(self) -> tuple[Turn, Acceleration]:
         """Check for new user input and convert to valid move."""
  
         # Allow quitting
@@ -46,17 +45,24 @@ class Game:
         else:
             turn = Turn.STRAIGHT
 
-        accelerate =  keys[pygame.K_SPACE]
+        accelerate = keys[pygame.K_s]
+        brake = keys[pygame.K_a]
+        if accelerate:
+            acceleration = Acceleration.FORWARD
+        elif brake:
+            acceleration = Acceleration.REVERSE
+        else:
+            acceleration = Acceleration.NONE
 
-        return turn, accelerate
+        return turn, acceleration
 
-    def advance(self, turn: Turn, accelerate: bool) -> None:
+    def advance(self, turn: Turn, acceleration: Acceleration) -> None:
         """Advance to the next frame."""
 
-        self.car.move(turn, accelerate)
+        self.car.move(turn, acceleration)
         self.track.update_gate(self.car)
-        if self.track.check_in_bounds(self.car.outline):
-            self.track.place_car_at_start(self.car)
+        #if self.track.check_in_bounds(self.car.outline):
+        #    self.track.place_car_at_start(self.car)
 
     def update_screen(self) -> None:
         """Draw the current frame to the screen."""
