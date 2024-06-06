@@ -42,13 +42,13 @@ def points_around(point: ControlPoint, in_angle: float, out_angle: float) -> lis
             out_angle -= 2 * math.pi
         while current_angle > out_angle:
             sector_arc.append(point.turning_point_at(current_angle))
-            current_angle -= math.pi/180
+            current_angle -= math.pi/90
     else:
         if out_angle < in_angle:
             out_angle += 2 * math.pi
         while current_angle < out_angle:
             sector_arc.append(point.turning_point_at(current_angle))
-            current_angle += math.pi/180
+            current_angle += math.pi/90
 
     return sector_arc
 
@@ -56,13 +56,13 @@ def points_around(point: ControlPoint, in_angle: float, out_angle: float) -> lis
 def interpolate(p1: Vector, p2: Vector) -> list[Vector]:
     """Return the points that make up the linear interpolation between p1 and p2.
     
-    The density is approximately 1 point per 2 pixels travelled.
+    The density is approximately 1 point per 5 pixels travelled.
     p1 is included, p2 is not.
     """
 
     vec_between = p2 - p1
-    step = 2 * vec_between/vec_between.magnitude
-    return [p1 + t * step for t in range(0,int(vec_between.magnitude//2))]
+    step = 5 * vec_between/vec_between.magnitude
+    return [p1 + t * step for t in range(0,int(vec_between.magnitude//5))]
     
 
 def curve_finder(points: list[ControlPoint]) -> deque[Vector]:
