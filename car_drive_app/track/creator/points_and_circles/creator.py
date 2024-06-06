@@ -23,7 +23,7 @@ class Creator:
         self.clock = pygame.time.Clock()
 
         # Set up initial basic loop
-        self.points = corner_points(dimensions, int(self.TRACK_WIDTH * 1.75))
+        self.points = corner_points(dimensions, int(self.TRACK_WIDTH * 1.55))
         self.full_curve = curve_finder(self.points)
 
     def check_events(self) -> bool:
@@ -73,14 +73,14 @@ class Creator:
                 elif event.key == pygame.K_UP:
                     try:
                         selected_point =  [point for point in self.points if point.selected][0]
-                        selected_point.turn_radius += 1
+                        selected_point.turn_radius += 5
                         self.full_curve = curve_finder(self.points)
                     except IndexError:
                         pass
                 elif event.key == pygame.K_DOWN:
                     try:
                         selected_point =  [point for point in self.points if point.selected][0]
-                        selected_point.turn_radius -= 1
+                        selected_point.turn_radius -= 5
                         selected_point.turn_radius = max(selected_point.turn_radius, 1)
                         self.full_curve = curve_finder(self.points)
                     except IndexError:
