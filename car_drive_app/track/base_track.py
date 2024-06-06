@@ -1,7 +1,6 @@
 from __future__ import annotations
 from collections import deque
 from itertools import islice
-import math
 import pickle
 from pathlib import Path
 
