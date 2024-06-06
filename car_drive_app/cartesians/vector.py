@@ -48,6 +48,9 @@ class Vector:
     def angle(self) -> float:
         """Return the angle the Vector is pointing at."""
     
+        if self.magnitude == 0:
+            return 0
+        
         unit_vector = self/self.magnitude
         return math.acos(unit_vector.x) if unit_vector.y > 0 else -1 * math.acos(unit_vector.x)
 
