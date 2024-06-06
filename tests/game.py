@@ -7,7 +7,7 @@ from car_drive_app.car import Car, Turn, Acceleration
 
 
 class Game:
-    """Controller of all game objects."""
+    """Game controller but all parts used in calculations are drawn on the screen."""
 
     def __init__(self) -> None:
 
@@ -73,6 +73,18 @@ class Game:
         # Draw the Track
         self.track.draw(self.screen)
 
+        # Draw the points we're currently tracking collisions using
+        for point in self.track.enclosed_center_line:
+            pygame.draw.circle(self.screen, 'purple', (point.x, point.y), 5)
+
+        # Draw the track gates
+        for gate in self.track.gates:
+            center = self.track.center_line[gate.index]
+            direction = gate.direction.rotate_by(math.pi/2)
+            start_pos = center - direction * self.track.radius * 1.2
+            end_pos = center + direction * self.track.radius * 1.2
+            pygame.draw.line(self.screen, 'blue', (start_pos.x, start_pos.y), (end_pos.x, end_pos.y), width=4)
+
         # Draw the Car
         pygame.draw.circle(self.screen, 'red', (self.car.position.x, self.car.position.y), 5)
         for point in self.car.outline:
@@ -95,3 +107,8 @@ class Game:
             self.update_screen()
 
             self.clock.tick(60)
+
+
+if __name__ == '__main__':
+    game = Game()
+    game.run()
