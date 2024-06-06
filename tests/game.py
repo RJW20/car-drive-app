@@ -1,3 +1,4 @@
+import sys
 import math
 
 import pygame
@@ -9,10 +10,10 @@ from car_drive_app.car import Car, Turn, Acceleration
 class Game:
     """Game controller but all parts used in calculations are drawn on the screen."""
 
-    def __init__(self) -> None:
+    def __init__(self, track_save_name: str) -> None:
 
         # Load the Track
-        self.track = Track.load()
+        self.track = Track.load(track_save_name)
 
         # Start the Car
         self.car = Car()
@@ -110,5 +111,6 @@ class Game:
 
 
 if __name__ == '__main__':
-    game = Game()
+    track_save_name = sys.argv[1]
+    game = Game(track_save_name)
     game.run()
