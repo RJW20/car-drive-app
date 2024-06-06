@@ -66,13 +66,12 @@ class Game:
         """Draw the current frame to the screen."""
 
         # Wipe the last frame
-        self.screen.fill('green')
+        self.screen.fill((37,255,0))
 
         # Draw the Track
         self.track.draw(self.screen)
 
         # Draw the Car
-        pygame.draw.circle(self.screen, 'red', (self.car.position.x, self.car.position.y), 5)
         for point in self.car.outline:
             pygame.draw.circle(self.screen, 'black', (point.x, point.y), 1)
 

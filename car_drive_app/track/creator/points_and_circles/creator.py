@@ -114,7 +114,7 @@ class Creator:
     def draw_track(self) -> None:
         """Draw self.full_curve and self.points."""
 
-        self.screen.fill('green')
+        self.screen.fill((37,255,0))
 
         # Draw the curve
         for point in self.full_curve:

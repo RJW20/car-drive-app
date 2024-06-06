@@ -68,7 +68,7 @@ class Game:
         """Draw the current frame to the screen."""
 
         # Wipe the last frame
-        self.screen.fill('green')
+        self.screen.fill((37,255,0))
 
         # Draw the Track
         self.track.draw(self.screen)
