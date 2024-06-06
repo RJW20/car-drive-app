@@ -22,8 +22,6 @@ class RigidBody:
         self.angular_velocity: float
         self.torque: float
 
-        self.force_pairs: list[tuple[Vector, Vector]] = []
-
     def reset(self, position: Vector = Vector(0,0), angle: float = 0) -> None:
         """Return the RigidBody to stationary."""
             
