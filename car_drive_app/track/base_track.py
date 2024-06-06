@@ -40,7 +40,7 @@ class BaseTrack:
         elif direction.x > 0:
             return math.atan(direction.y/direction.x)
         else:
-            return math.pi - math.atan(direction.y/direction.x)
+            return math.pi + math.atan(direction.y/direction.x)
     
     def place_car_at_start(self, car: BaseCar) -> Vector:
         """Reset the Car just behind the startline."""
