@@ -20,7 +20,7 @@ class BaseTrack:
 
         # Create a list of Gates around the Track
         self.gates: list[Gate] = []
-        for i in range(0, len(self.center_line) - self.radius + 1, self.radius):
+        for i in range(0, len(self.center_line) - self.radius//2 + 1, self.radius//2):
             direction = self.center_line[i+1] - self.center_line[i]
             self.gates.append(Gate(i, direction))
         self.total_gates = len(self.gates)
