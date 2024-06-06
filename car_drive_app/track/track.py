@@ -40,15 +40,15 @@ class Track(BaseTrack):
             pygame.draw.line(screen, (232, 237, 115), (start_pos.x, start_pos.y), (end_pos.x, end_pos.y), width=2)
 
     @classmethod
-    def load(cls) -> Track:
+    def load(cls, name: str) -> Track:
+        """Return the Track saved at 'tracks/{name}.pickle'."""
 
-        source = Path('track.pickle')
-
+        source = Path(f'tracks/{name}.pickle')
         try:
             with source.open('rb') as src:
                 dimensions = pickle.load(src)
                 center_line = pickle.load(src)
-                radius = pickle.load(src)
-                return cls(dimensions, center_line, radius)
+                width = pickle.load(src)
+                return cls(dimensions, center_line, width)
         except OSError:
             raise OSError(f'Unable to open Track save \'{source}\'.')

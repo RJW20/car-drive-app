@@ -108,19 +108,20 @@ class BaseTrack:
 
         return False
 
-    def save(self) -> None:
+    def save(self, name: str) -> None:
+        """Save the constituents needed to reload this Track to 'tracks/{name}.pickle'."""
 
-        destination = Path('track.pickle')
+        destination = Path(f'{name}.pickle')
         with destination.open('wb') as dest:
             pickle.dump(self.dimensions, dest)
             pickle.dump(self.center_line, dest)
             pickle.dump(self.radius * 2, dest)
 
     @classmethod
-    def load(cls) -> BaseTrack:
+    def load(cls, name: str) -> BaseTrack:
+        """Return the Track saved at 'tracks/{name}.pickle'."""
 
-        source = Path('track.pickle')
-
+        source = Path(f'tracks/{name}.pickle')
         try:
             with source.open('rb') as src:
                 dimensions = pickle.load(src)
