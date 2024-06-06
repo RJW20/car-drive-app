@@ -44,6 +44,13 @@ class Vector:
         """Return the Euclidean length of the Vector."""
         return math.sqrt(self.x ** 2 + self.y ** 2)
     
+    @property
+    def angle(self) -> float:
+        """Return the angle the Vector is pointing at."""
+    
+        unit_vector = self/self.magnitude
+        return math.acos(unit_vector.x) if unit_vector.y > 0 else -1 * math.acos(unit_vector.x)
+
     @classmethod
     def unit_from_angle(cls, angle: float) -> Vector:
         """Return the unit Vector pointing along the given angle."""
