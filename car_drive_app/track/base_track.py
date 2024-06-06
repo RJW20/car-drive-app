@@ -53,17 +53,30 @@ class BaseTrack:
         return self.gates[self.current_gate_index]
 
     def update_gate(self, car: BaseCar) -> None:
-        """Update self.current_gate_index depending on if the Car has passed through self.current_gate.
-        
-        It is assumed the Car will only have passed through forwards.
-        """
+        """Update self.current_gate_index depending on if the Car has passed through self.current_gate
+        forwards or the gate before that backwards."""
 
+        # Advancing through Gate in front
+        # Advance if one point is through the Gate
+        gate_center = self.center_line[self.current_gate.index]
+        gate_direction = self.current_gate.direction
         for point in car.outline:
-            offset = point - self.center_line[self.current_gate.index]
-            if dot(offset, self.current_gate.direction) > 0:
+            offset = point - gate_center
+            if dot(offset, gate_direction) > 0:
                 self.current_gate_index = (self.current_gate_index + 1) % self.total_gates
                 return
-        
+            
+        # Advancing through Gate behind
+        # Advance us all points are through the Gate
+        gate = self.gates[self.current_gate_index - 1]
+        gate_center = self.center_line[gate.index]
+        gate_direction = gate.direction
+        for point in car.outline:
+            offset = point - gate_center
+            if dot(offset, gate_direction) > 0:
+                return
+        self.current_gate_index = (self.current_gate_index - 1) % self.total_gates
+
     @property
     def behind_gate(self) -> Gate:
         """Return the second Gate behind the Car."""
