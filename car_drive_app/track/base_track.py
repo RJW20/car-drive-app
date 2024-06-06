@@ -35,7 +35,9 @@ class BaseTrack:
         """Return the angle the Car should start pointing in."""
         
         direction = self.gates[0].direction
-        if direction.x > 0:
+        if direction.x == 0:
+            return math.pi/2 if direction.y > 0 else -1 * math.pi/2
+        elif direction.x > 0:
             return math.atan(direction.y/direction.x)
         else:
             return math.pi - math.atan(direction.y/direction.x)
