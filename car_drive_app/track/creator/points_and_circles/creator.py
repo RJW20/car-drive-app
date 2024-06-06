@@ -15,6 +15,7 @@ class Creator:
         self.dimensions = dimensions
 
         # Pygame set up
+        pygame.init()
         self.screen = pygame.display.set_mode((dimensions.x, dimensions.y))
         pygame.display.set_caption("Track Creator")
         self.clock = pygame.time.Clock()
@@ -29,8 +30,9 @@ class Creator:
         Returns True if the return key is pressed.
         """
 
-        # Allow quitting
         for event in pygame.event.get():
+
+            # Allow quitting
             if event.type == pygame.QUIT: 
                 pygame.quit()
                 exit()

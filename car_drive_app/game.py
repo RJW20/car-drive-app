@@ -21,6 +21,7 @@ class Game:
         
         # Pygame set up
         self.dimensions = self.track.dimensions
+        pygame.init()
         self.screen = pygame.display.set_mode((self.dimensions.x, self.dimensions.y))
         pygame.display.set_caption("Car Drive")
         self.clock = pygame.time.Clock()
