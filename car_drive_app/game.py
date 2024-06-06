@@ -1,5 +1,3 @@
-import math
-
 import pygame
 
 from car_drive_app.track import Track
