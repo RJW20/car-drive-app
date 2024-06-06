@@ -51,8 +51,6 @@ class RigidBody:
 
         self.forces += world_force
         self.torque += cross(world_offset, world_force)
-
-        self.force_pairs.append((world_force, self.position + world_offset))
         
     def update(self) -> None:
         """Update position and angle using self.forces and self.torque."""
