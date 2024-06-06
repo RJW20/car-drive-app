@@ -4,6 +4,7 @@ from car_drive_app.car.rigid_body import RigidBody
 from car_drive_app.car.wheel import BaseWheel, FrontWheel, BackWheel
 from car_drive_app.cartesians import Vector
 from car_drive_app.car.turn import Turn
+from car_drive_app.car.acceleration import Acceleration
 
 
 class BaseCar(RigidBody):
@@ -54,10 +55,10 @@ class BaseCar(RigidBody):
         """Return the Wheels of the Car."""
         return self.front_wheels + self.back_wheels
 
-    def move(self, turn: Turn, accelerate: bool) -> None:
+    def move(self, turn: Turn, acceleration: Acceleration) -> None:
         """Advance the Car one frame."""
 
-        torque_applied = - self.POWER / 2  if accelerate else 0
+        torque_applied = self.POWER * acceleration.value
         for wheel in self.front_wheels:
             wheel.turn_angle = max(min(wheel.turn_angle + turn.value, math.pi/3), -math.pi/3)
             world_wheel_offset = self.relative_to_world(wheel.offset)
@@ -78,6 +79,9 @@ class BaseCar(RigidBody):
         self.add_force(drag, Vector(0,0))
 
         super().update()
+
+        for wheel in self.front_wheels:
+            wheel.turn_angle *= 0.95
 
     @property
     def outline(self) -> list[Vector]:
