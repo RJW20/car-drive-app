@@ -90,15 +90,15 @@ class BaseTrack:
             return list(islice(self.center_line, self.behind_gate.index, None)) + list(islice(self.center_line, 0, self.in_front_gate.index))
 
     def check_in_bounds(self, points: list[Vector]) -> bool:
-        """Return True if the points given has any point not on the driveable section
+        """Return False if the points given has any point not on the driveable section
         of the Track."""
 
         enclosed_center_line = self.enclosed_center_line
         for point in points:
             if min([(point - center_point).magnitude for center_point in enclosed_center_line]) > self.radius:
-                return True
+                return False
 
-        return False
+        return True
 
     def save(self, name: str) -> None:
         """Save the constituents needed to reload this Track to 'tracks/{name}.pickle'."""

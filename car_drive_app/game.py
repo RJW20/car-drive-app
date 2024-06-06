@@ -59,7 +59,7 @@ class Game:
 
         self.car.move(turn, acceleration)
         self.track.update_gate(self.car)
-        if self.track.check_in_bounds(self.car.outline):
+        if not self.track.check_in_bounds(self.car.outline):
             self.track.place_car_at_start(self.car)
 
     def update_screen(self) -> None:
