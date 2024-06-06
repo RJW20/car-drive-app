@@ -111,7 +111,7 @@ class BaseTrack:
     def save(self, name: str) -> None:
         """Save the constituents needed to reload this Track to 'tracks/{name}.pickle'."""
 
-        destination = Path(f'{name}.pickle')
+        destination = Path(f'tracks/{name}.pickle')
         with destination.open('wb') as dest:
             pickle.dump(self.dimensions, dest)
             pickle.dump(self.center_line, dest)

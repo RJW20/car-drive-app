@@ -7,10 +7,10 @@ from car_drive_app.car import Car, Turn, Acceleration
 class Game:
     """Controller of all game objects."""
 
-    def __init__(self) -> None:
+    def __init__(self, track_save_name: str) -> None:
 
         # Load the Track
-        self.track = Track.load()
+        self.track = Track.load(track_save_name)
 
         # Start the Car
         self.car = Car()

@@ -12,9 +12,10 @@ class Creator:
 
     TRACK_WIDTH = 150
 
-    def __init__(self, dimensions: Vector) -> None:
+    def __init__(self, dimensions: Vector, track_save_name: str) -> None:
 
         self.dimensions = dimensions
+        self.track_save_name = track_save_name
 
         # Pygame set up
         pygame.init()
@@ -177,4 +178,4 @@ class Creator:
 
         # Create/save a Track
         track = BaseTrack(self.dimensions, self.full_curve, self.TRACK_WIDTH)
-        track.save()
+        track.save(self.track_save_name)
