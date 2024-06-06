@@ -23,7 +23,7 @@ class Creator:
         self.clock = pygame.time.Clock()
 
         # Set up initial basic loop
-        self.points = corner_points(dimensions, int(self.TRACK_WIDTH * 1.5))
+        self.points = corner_points(dimensions, int(self.TRACK_WIDTH * 1.75))
         self.full_curve = curve_finder(self.points)
 
     def check_events(self) -> bool:
