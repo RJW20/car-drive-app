@@ -13,7 +13,7 @@ class BaseCar(RigidBody):
     LENGTH = 80
     WIDTH = 40
     MASS = 200
-    POWER = 400
+    POWER = 600
     DRAG_COEFFICIENT = 0.8
 
     def __init__(self) -> None:
