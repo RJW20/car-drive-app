@@ -27,7 +27,7 @@ class BaseCar(RigidBody):
         # Set up the RigidBody
         super().__init__(Vector(80,40), self.MASS + 4 * self.wheels[0].MASS)
 
-    def reset(self, position: Vector = Vector(0,0), angle: float = 0) -> None:
+    def reset(self, position: Vector = Vector(100,100), angle: float = 0) -> None:
         """Return the Car to the given start point."""
 
         super().reset(position, angle)
