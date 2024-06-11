@@ -1,8 +1,10 @@
+import math
+
 import pygame
 
 from car_drive_app.track.track import Track
 from car_drive_app.car.car import Car
-from car_drive_app.car import Turn, Acceleration
+from car_drive_app.car import Acceleration
 
 
 class Game:
@@ -23,8 +25,13 @@ class Game:
         self.screen = pygame.display.set_mode((self.dimensions.x, self.dimensions.y))
         pygame.display.set_caption("Car Drive")
         self.clock = pygame.time.Clock()
+        try:
+            self.joystick = pygame.joystick.Joystick(0)
+            self.joystick.init()
+        except pygame.error:
+            raise Exception('No Controller found')
 
-    def check_move(self) -> tuple[Turn, Acceleration]:
+    def check_move(self) -> tuple[float, Acceleration]:
         """Check for new user input and convert to valid move."""
  
         # Allow quitting
@@ -33,19 +40,11 @@ class Game:
                 pygame.quit()
                 exit()
 
-        # Check for key input
-        keys = pygame.key.get_pressed()
+        # Check for user input
+        turn_angle = self.joystick.get_axis(0) * math.pi / 4
 
-        if keys[pygame.K_RIGHT] != keys[pygame.K_LEFT]:
-            if keys[pygame.K_RIGHT]:
-                turn = Turn.RIGHT
-            else:
-                turn = Turn.LEFT
-        else:
-            turn = Turn.STRAIGHT
-
-        accelerate = keys[pygame.K_s]
-        brake = keys[pygame.K_a]
+        accelerate = self.joystick.get_button(0)
+        brake = self.joystick.get_button(1)
         if accelerate:
             acceleration = Acceleration.FORWARD
         elif brake:
@@ -53,12 +52,12 @@ class Game:
         else:
             acceleration = Acceleration.NONE
 
-        return turn, acceleration
+        return turn_angle, acceleration
 
-    def advance(self, turn: Turn, acceleration: Acceleration) -> None:
+    def advance(self, turn_angle: float, acceleration: Acceleration) -> None:
         """Advance to the next frame."""
 
-        self.car.move(turn, acceleration)
+        self.car.move(turn_angle, acceleration)
         self.track.update_gate(self.car)
         if not self.track.check_in_bounds(self.car.outline):
             self.track.place_car_at_start(self.car)
