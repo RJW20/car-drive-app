@@ -79,9 +79,6 @@ class BaseCar(RigidBody):
 
         super().update()
 
-        for wheel in self.front_wheels:
-            wheel.turn_angle *= 0.95
-
     @property
     def outline(self) -> list[Vector]:
         """Return 2D points that make up the outline of the Car."""
