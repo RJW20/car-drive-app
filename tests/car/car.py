@@ -66,7 +66,6 @@ class CarPhysics:
         self.screen.fill('white')
 
         # Draw the Car
-        pygame.draw.circle(self.screen, 'red', (self.car.position.x, self.car.position.y), 5)
         for point in self.car.outline:
             pygame.draw.circle(self.screen, 'black', (point.x, point.y), 1)
 
