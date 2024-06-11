@@ -1,11 +1,11 @@
-from car_drive_app.car.wheel import Wheel
+from car_drive_app.car.wheel.back_wheel import BackWheel
 from car_drive_app.cartesians import Vector
 
 
 def consant_forward() -> None:
     """Tests that a Wheel set in forward motion never stops."""
 
-    wheel = Wheel(offset=Vector(0,0))
+    wheel = BackWheel(offset=Vector(0,0))
     wheel.reset()
 
     wheel.rotation_speed = 1  # Moving forwards is negative
@@ -25,7 +25,7 @@ def match_floor() -> None:
     direction of the Wheel's forward axis) tends towards the rotation speed which gives 
     its surface the same speed as the floor."""
 
-    wheel = Wheel(offset=Vector(0,0))
+    wheel = BackWheel(offset=Vector(0,0))
     wheel.reset()
 
     floor_velocity = Vector(-1,0)
@@ -43,7 +43,7 @@ def side_velocity() -> None:
     """Tests that a Wheel on a floor moving perpendicular to it has friction pulling in
     the direction the floor is moving."""
 
-    wheel = Wheel(offset=Vector(0,0))
+    wheel = BackWheel(offset=Vector(0,0))
     wheel.reset()
 
     floor_velocity = Vector(0,1)
