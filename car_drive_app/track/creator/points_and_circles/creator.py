@@ -3,7 +3,7 @@ import pygame
 from car_drive_app.track.base_track import BaseTrack
 from car_drive_app.cartesians import Vector
 from car_drive_app.track.creator.points_and_circles.control_point import ControlPoint
-from car_drive_app.track.creator.points_and_circles.corner_points import corner_points
+from car_drive_app.track.creator.corner_points import corner_points
 from car_drive_app.track.creator.points_and_circles.curve_finder import curve_finder
 
 
@@ -24,7 +24,7 @@ class Creator:
         self.clock = pygame.time.Clock()
 
         # Set up initial basic loop
-        self.points = corner_points(dimensions, int(self.TRACK_WIDTH * 1.55))
+        self.points = corner_points(dimensions, int(self.TRACK_WIDTH * 1.55), ControlPoint)
         self.full_curve = curve_finder(self.points)
 
     def check_events(self) -> bool:
