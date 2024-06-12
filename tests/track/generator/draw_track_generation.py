@@ -37,14 +37,14 @@ def main() -> None:
             pygame.draw.circle(screen, 'grey', (point.x, point.y), TRACK_WIDTH // 2)
 
         # Draw lines between points and midpoints
-        pygame.draw.lines(screen, 'blue', True, [(point.x, point.y) for point in points_and_mps], 2)
+        pygame.draw.lines(screen, 'blue', True, [(point.x, point.y) for point in points_and_mps], 4)
 
         # Draw convex hull
-        pygame.draw.lines(screen, 'red', True, [(point.x, point.y) for point in c_hull], 2)
+        pygame.draw.lines(screen, 'red', True, [(point.x, point.y) for point in c_hull], 4)
 
         # Draw all the original points
         for point in points:
-            pygame.draw.circle(screen, 'white', (point.x, point.y), 5)
+            pygame.draw.circle(screen, 'white', (point.x, point.y), 10)
 
         pygame.display.flip()
 

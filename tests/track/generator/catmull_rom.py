@@ -16,7 +16,7 @@ def main() -> None:
     points_and_mps = displaced_midpoints(c_hull, 1)
     full_curve = catmull_rom(points_and_mps)
 
-    # Draw the original convex hull points, midpoints and the points in the full
+    # Draw the original convex hull points, midpoints and the points in the full curve
     pygame.init()
     screen = pygame.display.set_mode((dimensions.x, dimensions.y))
     pygame.display.set_caption("Random Points")
