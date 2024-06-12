@@ -18,6 +18,7 @@ class Creator:
         self.track_save_name = track_save_name
 
         # Pygame set up
+        pygame.init()
         self.screen = pygame.display.set_mode((dimensions.x, dimensions.y))
         pygame.display.set_caption("Track Creator")
         self.clock = pygame.time.Clock()
