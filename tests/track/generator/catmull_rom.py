@@ -6,7 +6,6 @@ from car_drive_app.track.generator.convex_hull import convex_hull
 from car_drive_app.track.generator.displaced_midpoints import displaced_midpoints
 from car_drive_app.track.creator.points_and_splines.catmull_rom import catmull_rom
 
-
 def main() -> None:
 
     # Create the points
@@ -17,7 +16,7 @@ def main() -> None:
     points_and_mps = displaced_midpoints(c_hull, 1)
     full_curve = catmull_rom(points_and_mps)
 
-    # Draw all steps of creation
+    # Draw the original convex hull points, midpoints and the points in the full
     pygame.init()
     screen = pygame.display.set_mode((dimensions.x, dimensions.y))
     pygame.display.set_caption("Random Points")
@@ -32,20 +31,15 @@ def main() -> None:
 
         screen.fill((37,255,0))
 
-        # Draw the curve
         for point in full_curve:
-            pygame.draw.circle(screen, 'grey', (point.x, point.y), TRACK_WIDTH // 2)
+            pygame.draw.circle(screen, 'purple', (point.x, point.y), 2)
 
-        # Draw lines between points and midpoints
-        pygame.draw.lines(screen, 'blue', True, [(point.x, point.y) for point in points_and_mps], 2)
+        for point in points_and_mps:
+            pygame.draw.circle(screen, 'blue', (point.x, point.y), 10)
 
-        # Draw convex hull
-        pygame.draw.lines(screen, 'red', True, [(point.x, point.y) for point in c_hull], 2)
-
-        # Draw all the original points
-        for point in points:
-            pygame.draw.circle(screen, 'white', (point.x, point.y), 5)
-
+        for point in c_hull:
+            pygame.draw.circle(screen, 'white', (point.x, point.y), 10)
+            
         pygame.display.flip()
 
         clock.tick(60)
