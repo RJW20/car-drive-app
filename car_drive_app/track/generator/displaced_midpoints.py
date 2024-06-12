@@ -9,17 +9,20 @@ def midpoint(vec1: Vector, vec2: Vector) -> Vector:
     return (vec1 + vec2) / 2
 
 
-def displacement_vector(
-    severity: float,
-    max_length: float,
-) -> Vector:
+def separation(vec1: Vector, vec2: Vector) -> Vector:
+    """Return the separation length between two Vectors."""
+    return (vec1 - vec2).magnitude
+
+
+def displacement_vector(direction: Vector, severity: float, max_length: float) -> Vector:
     """Return a displacement Vector with given severity.
     
-    Points in a random direction.
-    Length tends towards max_length given as as severity gets closer to 0.
+    Points in a direction -60 to -120 degrees from the given direction Vector (always
+    points left).
+    Length tends towards max_length given as severity gets closer to 0.
     """
 
-    orientation = random.uniform(-math.pi/2, math.pi/2)
+    orientation = direction.angle - random.uniform(math.pi/3, 2 * math.pi/3)
     length = max_length * random.random() ** severity
     return Vector.unit_from_angle(orientation) * length
 
@@ -27,16 +30,15 @@ def displacement_vector(
 def displaced_midpoints(
     points: list[Vector],
     severity: float,
-    max_displacement: float,
 ) -> list[Vector]:
     """Return a list of points containing the input points as well as points that
     are the result of finding the midpoint between consecutive points and randomly
     displacing it.
     
-    points should form a closed loop, but the returned points won't do (last point 
-    will be omitted).
-    The displacement length increases as the severity gets closer to 0, always having 
-    the value max_displacement there.
+    points should form a closed loop, but the returned points won't (last point will
+    be omitted).
+    The displacement lengths tend to increase as the severity gets closer to 0, always
+    having the value of 1/2 the distance between the consecutive points there.
     """
 
     points_and_disp_mids = []
@@ -45,7 +47,8 @@ def displaced_midpoints(
     for i, point in enumerate(points[:-1]):
         next_point = points[(i+1)%N]
         m_p = midpoint(point, next_point)
-        displacement = displacement_vector(severity, max_displacement)
+        max_displacement = separation(point, next_point) / 2
+        displacement = displacement_vector(next_point - point, severity, max_displacement)
         points_and_disp_mids.extend([point, m_p + displacement])
 
     return points_and_disp_mids
