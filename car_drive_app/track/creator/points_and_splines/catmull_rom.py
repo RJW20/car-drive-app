@@ -20,7 +20,7 @@ def interpolate(points: list[Vector]) -> list[Vector]:
     The density is approximately 1 point per 5 pixels travelled.
     """
 
-    num_points = (points[2] - points[1]).magnitude // 5
+    num_points = int((points[2] - points[1]).magnitude // 5)
 
     # Prepare the t_i values
     time_intervals = [0]
@@ -49,7 +49,7 @@ def catmull_rom(points: list[Vector]) -> deque[Vector]:
     The actual distance between each point will depend on the spacing between the control points.
     """
 
-    curve = deque
+    curve = deque()
     
     # First segment has last point as P0
     curve.extend(interpolate([points[-1], points[0], points[1], points[2]]))
