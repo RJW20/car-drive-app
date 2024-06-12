@@ -34,6 +34,8 @@ def displaced_midpoints(
     are the result of finding the midpoint between consecutive points and randomly
     displacing it.
     
+    points should form a closed loop, but the returned points won't do (last point 
+    will be omitted).
     The displacement length increases as the severity gets closer to 0, always having 
     the value max_displacement there.
     """
