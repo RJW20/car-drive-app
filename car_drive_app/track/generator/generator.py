@@ -9,7 +9,8 @@ from car_drive_app.track.creator.points_and_splines.catmull_rom import catmull_r
 
 
 def generator(dimensions: Vector, track_save_name: str) -> BaseTrack:
-    """Return a randomly generated BaseTrack that fits on the plane of given dimensions."""
+    """Save a randomly generated BaseTrack that fits on the plane of given dimensions 
+    to the file 'tracks/{track_save_name}.pickle'."""
 
     TRACK_WIDTH = 150
 

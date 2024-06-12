@@ -14,6 +14,7 @@ pygame = "^2.5.2"
 main = "scripts.main:main"
 creator_1 = "scripts.creator:creator_1"
 creator_2 = "scripts.creator:creator_2"
+generator = "scripts.generator:generator"
 
 [build-system]
 requires = ["poetry-core"]
