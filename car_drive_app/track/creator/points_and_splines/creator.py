@@ -2,16 +2,19 @@ import pygame
 
 from car_drive_app.cartesians import Vector
 from car_drive_app.track.creator.points_and_splines.control_point import ControlPoint
-from car_drive_app.track.creator.points_and_splines.corner_points import corner_points
+from car_drive_app.track.creator.corner_points import corner_points
 from car_drive_app.track.creator.points_and_splines.catmull_rom import catmull_rom
 
 
 class Creator:
     """Class for creating Tracks using points and splines."""
 
-    def __init__(self, dimensions: Vector) -> None:
+    TRACK_WIDTH = 150
+
+    def __init__(self, dimensions: Vector, track_save_name: str) -> None:
 
         self.dimensions = dimensions
+        self.track_save_name = track_save_name
 
         # Pygame set up
         self.screen = pygame.display.set_mode((dimensions.x, dimensions.y))
@@ -19,8 +22,8 @@ class Creator:
         self.clock = pygame.time.Clock()
 
         # Set up initial basic loop
-        self.points = corner_points(dimensions)
-        self.full_curve = catmull_rom(self.points, 100)
+        self.points = corner_points(dimensions, int(self.TRACK_WIDTH * 1.55), ControlPoint)
+        self.full_curve = catmull_rom(self.points)
 
     def check_events(self) -> None:
         """Check for mouse clicks for quitting, dragging and new points."""
