@@ -1,7 +1,6 @@
 from collections import deque
 
 from car_drive_app.cartesians import Vector
-from car_drive_app.track.creator.points_and_splines.control_point import ControlPoint
 
 
 def interpolation_point(t: float, points: list[Vector], time_intervals: list[float]) -> Vector:
@@ -42,7 +41,7 @@ def interpolate(points: list[Vector]) -> list[Vector]:
     return interpolation
     
 
-def catmull_rom(points: list[ControlPoint]) -> deque[Vector]:
+def catmull_rom(points: list[Vector]) -> deque[Vector]:
     """Return the list of Vectors that make up the Catmull-Rom interpolation curve of the 
     given points.
     
@@ -50,7 +49,7 @@ def catmull_rom(points: list[ControlPoint]) -> deque[Vector]:
     The actual distance between each point will depend on the spacing between the control points.
     """
 
-    # Convert ControlPoints to plain Vectors
+    # Convert any Vector children to plain Vectors
     points = [Vector(point.x, point.y) for point in points]
 
     curve = deque()
