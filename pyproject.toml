@@ -12,7 +12,8 @@ pygame = "^2.5.2"
 
 [tool.poetry.scripts]
 main = "scripts.main:main"
-creator = "scripts.creator:creator"
+creator_1 = "scripts.creator:creator_1"
+creator_2 = "scripts.creator:creator_2"
 
 [build-system]
 requires = ["poetry-core"]
