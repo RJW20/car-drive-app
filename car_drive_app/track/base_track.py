@@ -59,7 +59,7 @@ class BaseTrack:
                 return
             
         # Advancing through Gate behind
-        # Advance us all points are through the Gate
+        # Advance if all points are through the Gate
         gate = self.gates[self.current_gate_index - 1]
         gate_center = self.center_line[gate.index]
         gate_direction = gate.direction
