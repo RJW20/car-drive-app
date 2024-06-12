@@ -15,7 +15,7 @@ def main() -> None:
     # Draw the points and lines around the convex hull
     pygame.init()
     screen = pygame.display.set_mode((dimensions.x, dimensions.y))
-    pygame.display.set_caption("Random Points")
+    pygame.display.set_caption("Convex Hull")
     clock = pygame.time.Clock()
 
     while True:

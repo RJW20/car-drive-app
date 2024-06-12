@@ -19,7 +19,7 @@ def main() -> None:
     # Draw the original convex hull points, midpoints and the points in the full curve
     pygame.init()
     screen = pygame.display.set_mode((dimensions.x, dimensions.y))
-    pygame.display.set_caption("Random Points")
+    pygame.display.set_caption("Catmull-Rom")
     clock = pygame.time.Clock()
 
     while True:

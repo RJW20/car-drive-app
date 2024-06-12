@@ -20,7 +20,7 @@ def main() -> None:
     # Draw all steps of creation
     pygame.init()
     screen = pygame.display.set_mode((dimensions.x, dimensions.y))
-    pygame.display.set_caption("Random Points")
+    pygame.display.set_caption("Track Generation")
     clock = pygame.time.Clock()
 
     while True:

@@ -17,7 +17,7 @@ def main() -> None:
     # Draw the original convex hull points and midpoints as well as lines around
     pygame.init()
     screen = pygame.display.set_mode((dimensions.x, dimensions.y))
-    pygame.display.set_caption("Random Points")
+    pygame.display.set_caption("Displaced Midpoints")
     clock = pygame.time.Clock()
 
     while True:
