@@ -1,3 +1,5 @@
+from collections import deque
+
 from car_drive_app.cartesians import Vector
 
 
@@ -39,7 +41,7 @@ def interpolate(points: list[Vector]) -> list[Vector]:
     return interpolation
     
 
-def catmull_rom(points: list[Vector]) -> list[Vector]:
+def catmull_rom(points: list[Vector]) -> deque[Vector]:
     """Return the list of Vectors that make up the Catmull-Rom interpolation curve of the 
     given points.
     
@@ -47,7 +49,7 @@ def catmull_rom(points: list[Vector]) -> list[Vector]:
     The actual distance between each point will depend on the spacing between the control points.
     """
 
-    curve = []
+    curve = deque
     
     # First segment has last point as P0
     curve.extend(interpolate([points[-1], points[0], points[1], points[2]]))
