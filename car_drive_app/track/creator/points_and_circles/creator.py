@@ -5,6 +5,7 @@ from car_drive_app.cartesians import Vector
 from car_drive_app.track.creator.points_and_circles.control_point import ControlPoint
 from car_drive_app.track.creator.corner_points import corner_points
 from car_drive_app.track.creator.points_and_circles.curve_finder import curve_finder
+from car_drive_app.track.validator import validate
 
 
 class Creator:
@@ -176,6 +177,7 @@ class Creator:
         self.create_track()
         self.set_start_point()
 
-        # Create/save a Track
-        track = BaseTrack(self.full_curve, self.TRACK_WIDTH)
+        # Create/validate/save a Track
+        track = BaseTrack(self.dimensions, self.full_curve, self.TRACK_WIDTH)
+        validate(track)
         track.save(self.track_save_name)
