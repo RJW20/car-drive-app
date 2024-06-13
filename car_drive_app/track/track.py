@@ -46,8 +46,9 @@ class Track(BaseTrack):
         source = Path(f'tracks/{name}.pickle')
         try:
             with source.open('rb') as src:
+                dimensions = pickle.load(src)
                 center_line = pickle.load(src)
                 width = pickle.load(src)
-                return cls(center_line, width)
+                return cls(dimensions, center_line, width)
         except OSError:
             raise OSError(f'Unable to open Track save \'{source}\'.')
