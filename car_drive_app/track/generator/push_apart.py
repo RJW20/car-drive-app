@@ -4,9 +4,10 @@ from car_drive_app.cartesians import Vector
 def push_apart(points: list[Vector], min_distance: int) -> bool:
     """Push apart any consecutive points in the given list that have less than min_distance
     separation between them.
-    
+
     Returns True if any points were altered.
     Pushes both points further away in line with the original vector between them.
+    points should not be a closed loop.
     """
 
     altered = False
