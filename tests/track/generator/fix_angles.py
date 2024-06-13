@@ -13,7 +13,7 @@ def main() -> None:
     TRACK_WIDTH = 150
     points = random_points(dimensions, TRACK_WIDTH)
     c_hull = convex_hull(points)
-    points_and_mps = displaced_midpoints(c_hull, 1)
+    points_and_mps = displaced_midpoints(c_hull, 1, 2 * TRACK_WIDTH)
 
     # Draw the original convex hull points and midpoints as well as lines around
     pygame.init()
