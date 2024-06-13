@@ -24,9 +24,11 @@ def fix_angles(points: list[Vector]) -> bool:
         angle_between = math.atan2(cross(previous_offset, next_offset), dot(previous_offset, next_offset))
         if abs(angle_between) > math.pi/2:
             continue
-        angle_to_rotate_by = math.copysign(math.pi/2, angle_between) - angle_between
+        angle_to_rotate_by = 1.05 * (math.copysign(math.pi/2, angle_between) - angle_between)
         new_next_offset = next_offset.rotate_by(angle_to_rotate_by)
         points[(i+1)%N] = point + new_next_offset
         altered = True
+
+    print(f'{altered = }')
 
     return altered
