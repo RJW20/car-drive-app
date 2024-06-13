@@ -23,5 +23,5 @@ def generator(dimensions: Vector, track_save_name: str) -> BaseTrack:
         pass
     full_curve = catmull_rom(points_and_mps)
     full_curve.rotate(random.randint(0, len(full_curve) - 1))
-    track = BaseTrack(dimensions, full_curve, TRACK_WIDTH)
+    track = BaseTrack(full_curve, TRACK_WIDTH)
     track.save(track_save_name)
