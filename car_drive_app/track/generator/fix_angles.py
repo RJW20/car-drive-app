@@ -29,6 +29,4 @@ def fix_angles(points: list[Vector]) -> bool:
         points[(i+1)%N] = point + new_next_offset
         altered = True
 
-    print(f'{altered = }')
-
     return altered
