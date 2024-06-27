@@ -25,18 +25,18 @@ When running method `creator_1`, you will be able to drag around the points and 
 
 Below are a few examples made using this method:
 
-![c1t1](https://github.com/RJW20/car-drive-app/assets/99192767/d3f431f2-2c90-4d83-a6db-1acb131196f8)
-![c1t2](https://github.com/RJW20/car-drive-app/assets/99192767/28924922-37ea-4f62-88a3-4764c93960c4)
-![c1t3](https://github.com/RJW20/car-drive-app/assets/99192767/24121e95-8154-4273-9fc2-1905ff58ac2e)
+![c1t1](https://github.com/RJW20/car-drive-app/assets/99192767/1f607d26-6778-4604-93e2-6fa631a01138)
+![c1t2](https://github.com/RJW20/car-drive-app/assets/99192767/90f00c8c-4864-48b0-92fc-68f48df87c91)
+![c1t3](https://github.com/RJW20/car-drive-app/assets/99192767/4cf8c6a9-5c11-45e4-8a94-63e19804ce53)
 
 ### Creator_2
 When running method `creator_2`, you will be able to drag around the points and the track will always traverse through them. Between the points a curve will be constructed using [Catmull-Rom interpolation](https://en.wikipedia.org/wiki/Centripetal_Catmull%E2%80%93Rom_spline). More points can be added with `SPACE`, and once happy with the design press the `ENTER` key and then click on the Track where you want the start/finish line to be.
 
 Below are a few examples made using this method:
 
-![c2t1](https://github.com/RJW20/car-drive-app/assets/99192767/e0affaa2-30a1-4642-bc2e-f902f3e678ab)
-![c2t2](https://github.com/RJW20/car-drive-app/assets/99192767/e8b982d9-9b76-4e6a-beaa-83f30ecee043)
-![c2t3](https://github.com/RJW20/car-drive-app/assets/99192767/4f33c73a-12fa-4c2d-a45a-ad032544996a)
+![c2t1](https://github.com/RJW20/car-drive-app/assets/99192767/80e694d7-6171-4bed-9d9b-60d368bee357)
+![c2t2](https://github.com/RJW20/car-drive-app/assets/99192767/dbac67c1-11fc-44d1-a7e2-1721bedcbe56)
+![c2t3](https://github.com/RJW20/car-drive-app/assets/99192767/79a95d45-d7ad-4b94-a14b-b153464fa658)
 
 ### Generator
 The generator works very similarly to what is described [here](https://www.gamedeveloper.com/programming/generating-procedural-racetracks). The outline is:
@@ -48,9 +48,9 @@ The generator works very similarly to what is described [here](https://www.gamed
 
 Below are a few examples generated using this method:
 
-![gt1](https://github.com/RJW20/car-drive-app/assets/99192767/2d4633ac-1cda-4cfb-9e3a-435c85a6bdff)
-![gt2](https://github.com/RJW20/car-drive-app/assets/99192767/d3479227-2818-4e6b-a7ab-0cbe5280d7a4)
-![gt3](https://github.com/RJW20/car-drive-app/assets/99192767/107d86ca-f44f-40a2-8de5-116ce205d7ff)
+![gt1](https://github.com/RJW20/car-drive-app/assets/99192767/4934be00-d1f9-4a91-aad7-896d916ecee8)
+![gt2](https://github.com/RJW20/car-drive-app/assets/99192767/a8453e31-bf71-4d2a-93d9-0a0f0b7999df)
+![gt3](https://github.com/RJW20/car-drive-app/assets/99192767/4ae3d676-77ba-43a6-bcd3-7ffdc22b4c2c)
 
 ## Note
 I created this so that I could then get AI to learn to drive around the Tracks. See [here](https://github.com/RJW20/car-drive-ai-NEAT).
