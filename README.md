@@ -16,6 +16,7 @@ A small amount of drifting is possible due to having different sideways friction
 1. Clone or download the repo `git clone https://github.com/RJW20/car-drive-app.git`.
 2. Set up the virtual environment with `poetry install`.
 3. Run the game with <code>poetry run main *track_name*</code> where track_name is the name of a track saved using any of the methods below.
+4. Turn the car with the left joystick, accelerate with `A` and brake with `B` and try and get around the Track without hitting the offroad.
 
 ## Tracks
 There are three methods to make Tracks. Two of these allow a user to build a track themselves, placing control points around the plane and a Track being generated around/through them, and the other generates them procedurally. All programs use the same syntax for instantiation <code>poetry run *method* *plane_width* *plane_height* *track_name*</code> where the methods are described below.
