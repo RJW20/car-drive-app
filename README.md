@@ -5,7 +5,7 @@ Simple Python game for driving a car around a track.
 
 A small amount of drifting is possible due to having different sideways friction coefficents for the front and back wheels:
 
-![drift](https://github.com/RJW20/car-drive-app/assets/99192767/34cc63f5-f3fe-4b26-a41f-5e8f15f86a64)
+![drift](https://github.com/RJW20/car-drive-app/assets/99192767/3399600c-3f2b-4585-9e61-aadb5f726c37)
 
 ## Basic Requirements
 1. [Python](https://www.python.org/downloads/).
